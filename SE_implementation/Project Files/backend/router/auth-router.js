@@ -6,4 +6,10 @@ app.get("/",(req,res)=>{
     res.status(200).send('Welcome');
  });
 
+ app.post("/AddProducts",(req,res)=>{
+    res.status(200).send("ProductAdded");
+ })
+
  module.exports = router
+
+ 
