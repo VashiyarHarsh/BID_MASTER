@@ -6,9 +6,26 @@ const mongoose = require("mongoose")
 const express = require("express");
 const app = express();
 const router = require("./router/staticRouter");
+const productRoute = require("./router/productRouter");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const fileUpload = require('express-fileupload')
 
+const corsOptions = {
+    origin: "http://localhost:5173",
+    method: "GET, POST, PUT, DELETE, PATCH, HEAD",
+    Credentials: true,
+};
+
+app.use(cors(corsOptions));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use("/", router);
+app.use("/api/form", productRoute);
+
+app.use(fileUpload())
 
 const connectDb = async () => {
     try {
@@ -25,6 +42,3 @@ connectDb().then(() => {
         console.log(`Server is running on ${PORT}`);
     });
 });
-
-
-
