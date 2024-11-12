@@ -50,7 +50,7 @@ const addProduct = async (req, res) => {
     const category = await Category.findOne({ name: req.body.category });
    
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
-   
+   console.log(subcategory);
     subcategory.items.push(newProduct._id);
     await category.save();
     // Respond with success

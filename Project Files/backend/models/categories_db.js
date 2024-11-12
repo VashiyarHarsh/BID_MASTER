@@ -33,33 +33,27 @@ const categories = [
     {
         name: 'Art & Antiques',
         subcategories: [
-            { name: 'Fine Art (Paintings, Sculptures)', items: [] },
-            { name: 'Antiques (Furniture, Collectibles)', items: [] },
-            { name: 'Decorative Art', items: [] },
-            { name: 'Vintage Jewelry', items: [] }
+            { name: 'Paintings', items: [] },
+            { name: 'Sculptures', items: [] },
+            { name: 'Art Pieces', items: [] }
         ]
     },
     {
-        name: 'Jewelry & Watches',
+        name: 'Jewellery & Watches',
         subcategories: [
-            { name: 'Fine Jewelry (Gold, Diamonds)', items: [] },
+            { name: 'Fine Jewellery', items: [] },
+            { name: 'Gemstones', items: [] },
             { name: 'Luxury Watches', items: [] },
-            { name: 'Costume Jewelry', items: [] },
-            { name: 'Gemstones', items: [] }
+            { name: 'Vintage Watches', items: [] }
         ]
     },
     {
-        name: 'Furniture & Home Decor',
+        name: 'Furniture',
         subcategories: [
             { name: 'Vintage Furniture', items: [] },
             { name: 'Designer Furniture', items: [] },
-            { name: 'Rugs & Carpets', items: [] },
-            { name: 'Home Appliances', items: [] }
+            { name: 'Rugs/Carpets', items: [] }
         ]
-    },
-    {
-        name: 'Books & Manuscripts',
-        subcategories: []
     },
     {
         name: 'Wine & Spirits',
@@ -71,12 +65,12 @@ const categories = [
         ]
     },
     {
-        name: 'Musical Instruments',
+        name: 'Books & Musical Instruments',
         subcategories: [
-            { name: 'Musical Instruments', items: [] },
-            { name: 'Vintage Records', items: [] }
+            {name: 'Vintage Records', item: []},
+            {name: 'Manuscripts', item: []}
         ]
-    }
+    },
 ];
 
 async function initializeCategories() {
