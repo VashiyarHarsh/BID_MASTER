@@ -2,11 +2,12 @@ const Product = require("../models/product_db");
 const Category = require("../models/categories_db");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const fs = require("fs");
+const { get } = require("http");
 
 const addProduct = async (req, res) => {
   try {
-    console.log("Files received:", req.files); // Debugging line
-    console.log("Data rece=eivd:", req.body.productImagesURL);
+    // console.log("Files received:", req.files); // Debugging line
+    // console.log("Data rece=eivd:", req.body.productImagesURL);
     
     const imageFiles = req.files;
   
@@ -50,7 +51,7 @@ const addProduct = async (req, res) => {
     const category = await Category.findOne({ name: req.body.category });
    
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
-   console.log(subcategory);
+   //console.log(subcategory);
     subcategory.items.push(newProduct._id);
     await category.save();
     // Respond with success
@@ -61,7 +62,49 @@ const addProduct = async (req, res) => {
   }
 };
 
-module.exports = { addProduct };
+const getProductsBySearch = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const products = await Product.find({ productName: name });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+  }
+}
+
+const getLatestCreatedProducts = async (req, res) => { 
+  try {
+    const products = await Product.find().sort({ createdAt: -1 }).limit(5);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+  }
+}
+
+const getOldestCreatedProducts = async (req, res) => {
+  try {
+    const products = await Product.find().sort({ createdAt: 1 }).limit(5);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+  }
+}
+
+const getProductsByReservePriceRange = async (req, res) => {
+  try {
+    const { min, max } = req.params;
+    const products = await Product.find({ reservePrice: { $gte: min, $lte: max } });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+  }
+}
+
+module.exports = { addProduct, getProductsBySearch, getLatestCreatedProducts, getOldestCreatedProducts, getProductsByReservePriceRange };
 
 
 
