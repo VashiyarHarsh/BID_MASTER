@@ -1,81 +1,207 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import "./addProducts.css";
 
-const AddProducts = () => {  
-  const { register, handleSubmit, reset } = useForm();
-  const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
+const AddProducts = () => {
+  const navigate = useNavigate();
 
-  const categories = ["Collectibles", "Art and Antiques", "Jewellery and Watches", "Furniture", "Wine and Spirits", "Books and Musical Instruments"];
+  const categories = ["Collectibles", "Art & Antiques", "Jewellery & Watches", "Furniture", "Wine & Spirits", "Books & Musical Instruments"];
   const subCategories = {
-   Collectibles: ["Coins and Currency", "Stamps", "Sports Memorabilia"],
-   "Art and Antiques": ["Paintings", "Sculptures", "Art Pieces"],
-   "Jewellery and Watches": ["Fine Jewellery", "Gemstones", "Luxury Watches", "Vintage Watches"],
-   Furniture: ["Vintage Furniture", "Designer Furniture", "Rugs/Carpets"],
-   "Wine and Spirits": ["Fine Wine", "Rare Whiskeys", "Vintage Spirits", "Champagne"],
-   "Books and Musical Instruments": ["Vintage Records", "Manuscripts"]
+    "Collectibles" : ["Coins & Currency", "Stamps", "Sports Memorabilia", "Comics & Trading Cards"],
+    "Art & Antiques": ["Paintings", "Sculptures", "Art Pieces"],
+    "Jewellery & Watches": ["Fine Jewellery", "Gemstones", "Luxury Watches", "Vintage Watches"],
+    "Furniture": ["Vintage Furniture", "Designer Furniture", "Rugs/Carpets"],
+    "Wine & Spirits": ["Fine Wine", "Rare Whiskeys", "Vintage Spirits", "Champagne"],
+    "Books & Musical Instruments": ["Vintage Records", "Manuscripts"]
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset(); 
-  };
-  const formStyle = {
-    maxWidth: "600px",
-    margin: "0 auto",
-    padding: "20px",
-    border: "1px solid #c2b280",
-    borderRadius: "8px",
-    backgroundColor: "#f9f5e5",
-    fontFamily: "'Garamond', serif",
-    boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.2)",
+  const [product, setProduct] = useState({
+    productName: '',
+    productDescription: '',
+    dimensions: '',
+    weight: '',
+    yearOfManufacture: '',
+    manufacturer: '',
+    reservePrice: '',
+    productImagesURL: [],
+    certifications: [],
+    category: '',
+    subCategory: ''
+  });
+
+  const handleInput = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    setProduct({
+      ...product,
+      [name]: value,
+    });
   };
 
-  const labelStyle = {
-    display: "block",
-    margin: "10px 0 5px",
-    fontWeight: "bold",
-    color: "#3e2723",
+  const handleInputFiles = (e) => {
+    const name = e.target.name;
+    const value = Object.values(e.target.files);
+
+    setProduct({
+      ...product,
+      [name]: value,
+    });
   };
 
-  const inputStyle = {
-    width: "100%",
-    maxWidth: "96.5%",
-    padding: "10px",
-    border: "1px solid #c2b280",
-    borderRadius: "4px",
-    backgroundColor: "#fff",
-    marginBottom: "15px",
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
 
-  const buttonStyle = {
-    backgroundColor: "#c2b280",
-    color: "#fff",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    fontSize: "16px",
-    fontWeight: "bold",
-  };
+    Object.keys(product).forEach((key) => {
+      if (key !== 'productImagesURL' && key !== 'certifications') {
+        formData.append(key, product[key]);
+      }
+    });
 
-  const buttonHoverStyle = {
-    backgroundColor: "#d6c48e",
+    if (product.productImagesURL) {
+      product.productImagesURL.forEach((file) => formData.append('productImagesURL', file));
+    }
+
+    if (product.certifications) {
+      product.certifications.forEach((file) => formData.append('certifications', file));
+    }
+
+    try {
+      const response = await fetch('http://localhost:5124/api/form/addProducts', {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+
+      alert("Product added successfully!");
+      navigate('/');
+    } catch (error) {
+      console.log("add product", error);
+      alert("Failed to add product.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={formStyle}>
+    <form onSubmit={handleSubmit} className="form-container">
       <div>
-        <label style={labelStyle}>Product Name</label>
-        <input style={inputStyle} {...register("productName", { required: true })} />
+        <label htmlFor="productName" className="form-label">Product Name</label>
+        <input type="text" name="productName" id="productName"
+          autoComplete="off"
+          value={product.productName}
+          onChange={handleInput}
+          required
+          className="form-input"
+        />
       </div>
 
       <div>
-        <label style={labelStyle}>Category</label>
+        <label htmlFor="productDescription" className="form-label">Product Description</label>
+        <textarea
+          name="productDescription"
+          id="productDescription"
+          autoComplete="off"
+          value={product.productDescription}
+          onChange={handleInput}
+          required
+          className="form-textarea"
+        ></textarea>
+      </div>
+
+      <div>
+        <label className="form-label">Reserve Price</label>
+        <input type="number" name="reservePrice" id="reservePrice"
+          autoComplete="off"
+          value={product.reservePrice}
+          onChange={handleInput}
+          onWheel={(e) => e.target.blur()}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Dimensions</label>
+        <input type="text" name="dimensions" id="dimensions"
+          autoComplete="off"
+          value={product.dimensions}
+          onChange={handleInput}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Weight</label>
+        <input type="number" name="weight" id="weight"
+          autoComplete="off"
+          value={product.weight}
+          onChange={handleInput}
+          onWheel={(e) => e.target.blur()}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Brand/Manufacturer</label>
+        <input type="text" name="manufacturer" id="manufacturer"
+          autoComplete="off"
+          value={product.manufacturer}
+          onChange={handleInput}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Year Of Manufacture</label>
+        <input type="number" name="yearOfManufacture" id="yearOfManufacture"
+          autoComplete="off"
+          value={product.yearOfManufacture}
+          onChange={handleInput}
+          onWheel={(e) => e.target.blur()}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Upload Image:</label>
+        <input
+          type="file"
+          name="productImagesURL"
+          accept="image/*"
+          onChange={handleInputFiles}
+          className="form-input"
+          required
+          multiple
+        />
+      </div>
+
+      <div>
+        <label className="form-label">Upload certificates:</label>
+        <input
+          type="file"
+          name="certifications"
+          accept=".pdf"
+          onChange={handleInputFiles}
+          className="form-input"
+          required
+          multiple
+        />
+        <small style={{color: "#6b6b6b" }}>Upload a PDF document.</small>
+      </div>
+
+      <div>
+        <label className="form-label">Category</label>
         <select
-          style={inputStyle}
-          {...register("category", { required: true })}
-          onChange={(e) => setCategory(e.target.value)}
+          name="category"
+          id="category"
+          className="form-input"
+          value={product.category}
+          onChange={handleInput}
+          required
         >
           <option value="">Select Category</option>
           {categories.map((cat) => (
@@ -86,12 +212,19 @@ const AddProducts = () => {
         </select>
       </div>
 
-      {category && (
+      {product.category && (
         <div>
-          <label style={labelStyle}>Sub Category</label>
-          <select style={inputStyle} {...register("subCategory", { required: true })}>
+          <label className="form-label">Sub Category</label>
+          <select
+            name="subCategory"
+            id="subCategory"
+            className="form-input"
+            value={product.subCategory}
+            onChange={handleInput}
+            required
+          >
             <option value="">Select Sub Category</option>
-            {subCategories[category].map((sub) => (
+            {subCategories[product.category]?.map((sub) => (
               <option key={sub} value={sub}>
                 {sub}
               </option>
@@ -100,61 +233,7 @@ const AddProducts = () => {
         </div>
       )}
 
-<div>
-        <label style={labelStyle}>Product Description</label>
-        <textarea style={{ ...inputStyle, height: "100px" }} {...register("description", { required: true })}></textarea>
-      </div>
-
-      <div>
-        <label style={labelStyle}>Minimum Price</label>
-        <input type="number" style={inputStyle} {...register("price", { required: true })} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>Dimensions</label>
-        <input style={inputStyle} {...register("dimensions", { required: true })} />
-      </div>
-
-
-      <div>
-        <label style={labelStyle}>Weight</label>
-        <input type="number" style={inputStyle} {...register("weight", { required: true })} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>Brand/Manufacturer</label>
-        <input style={inputStyle} {...register("brand", { required: true })} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>Country of Origin</label>
-        <input style={inputStyle} {...register("origin", { required: true })} />
-      </div>
-
-      <div>
-  <label style={labelStyle}>Certification </label>
-  <input 
-    type="file" 
-    style={inputStyle} 
-    {...register("certification", { required: true })} 
-    accept=".pdf" // Specify accepted file types
-  />
-  <small style={{ color: "#6b6b6b" }}>Upload a PDF document. </small>
-</div>
-
-<div>
-  <label style={labelStyle}>Photos</label>
-  <input 
-    type="file" 
-    style={inputStyle} 
-    {...register("photos", { required: true })} 
-    multiple 
-    accept="image/*" // Specify that any image format is accepted
-  />
- 
-</div>
-
-      <button type="submit" style={buttonStyle} onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)} onMouseOut={(e) => (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)}>
+      <button type="submit" className="submit-button">
         Add Product
       </button>
     </form>
