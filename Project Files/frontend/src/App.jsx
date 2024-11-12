@@ -5,7 +5,7 @@ import {ViewProducts} from "./pages/ViewProducts";
 import {Navbar} from "./components/Navbar";
 import {Footer} from "./components/Footer";
 import "./App.css"
-
+import UserProfile from "./pages/UserProfile"
 const App = () => {
   return (
 
@@ -17,7 +17,7 @@ const App = () => {
          */}
          <Route path="/AddProducts" element={<AddProducts />} />
          <Route path="/ViewProducts" element={<ViewProducts />} />
-
+         <Route path="/profile" element={<UserProfile/>}/>
 
       </Routes>
       <Footer />
