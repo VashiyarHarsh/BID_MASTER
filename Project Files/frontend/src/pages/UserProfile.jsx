@@ -2,17 +2,16 @@ import { useState } from 'react';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState({
-    name: "Jami Sidhava",
-    email: "jamisidhava@gmail.com",
-    joinDate: "January 2024"
+    name: "",
+    email: "",
   });
-
+  //Data to be fetched from database
   const [auctionHistory] = useState([
     { id: 1, item: "Vintage Watch", status: "Won", price: "$250", date: "2024-03-15", type: "purchase" },
     { id: 2, item: "Art Piece", status: "Lost", price: "$180", date: "2024-03-10", type: "purchase" },
     { id: 3, item: "Collectible Card", status: "Active", price: "$120", date: "2024-03-20", type: "purchase" },
   ]);
-
+  //Data to be fetched.............
   const [itemsSold] = useState([
     { id: 4, item: "Antique Lamp", price: "$350", date: "2024-04-02", status: "Sold", type: "sale" },
     { id: 5, item: "Luxury Bag", price: "$1200", date: "2024-04-05", status: "Sold", type: "sale" },
@@ -131,12 +130,12 @@ const UserProfile = () => {
       <div style={styles.container}>
         {/* Profile Details with Input Fields */}
         <div style={styles.header}>
-        <h1>{userData.name}'s Profile</h1>
+       
           <label style={styles.label}>
             Name:
             <input 
               type="text" 
-              name="name" 
+              name="Username" 
               value={userData.name} 
               onChange={handleInputChange}
               style={styles.input}
@@ -152,7 +151,7 @@ const UserProfile = () => {
               style={styles.input}
             />
           </label>
-          <p>Member since: {userData.joinDate}</p>
+         
         </div>
 
         {/* Main Content - Auction History and Item Sold */}
