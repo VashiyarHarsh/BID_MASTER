@@ -5,11 +5,11 @@ const PORT = process.env.PORT;
 const mongoose = require("mongoose")
 const express = require("express");
 const app = express();
-const router = require("./router/staticRouter");
 const productRoute = require("./router/productRouter");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const categoryRouter = require("./router/categoryRouter");
 
 const corsOptions = {
     origin: "http://localhost:5173",
@@ -22,8 +22,9 @@ app.use(cors(corsOptions));
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-app.use("/", router);
+//app.use("/", router);
 app.use("/api/form", productRoute);
+app.use("/filter", categoryRouter);
 
 app.use(fileUpload())
 

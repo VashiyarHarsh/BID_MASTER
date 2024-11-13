@@ -10,7 +10,7 @@ const AddProducts = () => {
     "Collectibles" : ["Coins & Currency", "Stamps", "Sports Memorabilia", "Comics & Trading Cards"],
     "Art & Antiques": ["Paintings", "Sculptures", "Art Pieces"],
     "Jewellery & Watches": ["Fine Jewellery", "Gemstones", "Luxury Watches", "Vintage Watches"],
-    "Furniture": ["Vintage Furniture", "Designer Furniture", "Rugs/Carpets"],
+    "Furniture": ["Vintage Furniture", "Designer Furniture", "Rugs-Carpets"],
     "Wine & Spirits": ["Fine Wine", "Rare Whiskeys", "Vintage Spirits", "Champagne"],
     "Books & Musical Instruments": ["Vintage Records", "Manuscripts"]
   };

@@ -52,7 +52,7 @@ const categories = [
         subcategories: [
             { name: 'Vintage Furniture', items: [] },
             { name: 'Designer Furniture', items: [] },
-            { name: 'Rugs/Carpets', items: [] }
+            { name: 'Rugs-Carpets', items: [] }
         ]
     },
     {

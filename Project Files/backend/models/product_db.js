@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    // finalPrice: {
+    //     type: Number,
+    //     default: 0
+    // },
     certifications: {
         type: [String], // Array of image URLs or file paths
         required: true,
@@ -47,10 +51,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: [true, "PLEASE SELECT SUBCATEGORY"]
     },
-    // createdAt: {
-    //     type: Date,
-    //     default: Date.now
-    // },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
     // seller: {
     //     type: mongoose.Schema.ObjectId,
     //     ref: 'USER'
