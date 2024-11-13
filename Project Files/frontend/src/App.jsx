@@ -6,6 +6,8 @@ import {Navbar} from "./components/Navbar";
 import {Footer} from "./components/Footer";
 import "./App.css"
 import UserProfile from "./pages/UserProfile"
+import SignupAndLogin from "./pages/SignupAndLogin"
+
 const App = () => {
   return (
 
@@ -18,7 +20,7 @@ const App = () => {
          <Route path="/AddProducts" element={<AddProducts />} />
          <Route path="/ViewProducts" element={<ViewProducts />} />
          <Route path="/profile" element={<UserProfile/>}/>
-
+        <Route path="/LOGIN" element={<SignupAndLogin/>}/>
       </Routes>
       <Footer />
 
