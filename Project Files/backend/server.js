@@ -10,6 +10,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
 const categoryRouter = require("./router/categoryRouter");
+const userRouter = require("./router/userRouter");
+const mailRouter = require("./router/mailRouter");
 
 const corsOptions = {
     origin: "http://localhost:5173",
@@ -25,6 +27,8 @@ app.use(express.json());
 //app.use("/", router);
 app.use("/api/form", productRoute);
 app.use("/filter", categoryRouter);
+app.use("/user", userRouter);
+app.use("/mail", mailRouter);
 
 app.use(fileUpload())
 

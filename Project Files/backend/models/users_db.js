@@ -1,39 +1,81 @@
-//Database Schema for SignUp
-
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { createHmac, randomBytes } = require("node:crypto");
+const { createTokenForUser } = require('../utils/authentication');
 
 const userSchema = new mongoose.Schema({
-    firstName:{
+    fullName: {
         type: String,
-        require: true,
+        required: true,
     },
-    lastName:{
+    userName: {
         type: String,
-        require: true,
+        required: true,
+        unique: true,
     },
-    middleName:{
+    role: {
         type: String,
-        require: false,
+        required: true,
+        enum: ["Buyer", "Seller", "Admin"],
+        default: "Buyer",
     },
-    DOB:{
-        type:Date,
-        req: true,
+    email: {
+        type: String,
+        required: true,
     },
-    email:{
-        type:email,
-        req:true,
+    password: {
+        type: String,
+        required: true,
     },
-    phoneNo:{
-        type:Number,
-        req:true,
+    // profileImageURL: {
+    //     type: String,
+    //     required: true,
+    //     default: "/images/default-profile-image.jpg",
+    // },
+    salt: { 
+        type: String,
+        //required: true,
     },
-    pwd:{
-        type:password,
-        req:true,
+    DOB: {
+        type: Date,
+        required: false,
+    },
+    phoneNo: {
+        type: Number,
+        required: false,
+    },
+    // soldItems: {
+    //     type: [mongoose.Schema.Types.ObjectId],
+    // },
+    // boughtItems: {
+    //     type: [mongoose.Schema.Types.ObjectId],
+    // }
+}, { timestamps: true });
+
+userSchema.pre('save', function (next) {
+    const user = this;
+    if (!user.isModified('password')) {
+        return next();
     }
-})
+    const salt = randomBytes(8).toString('hex');
+    const hashedPassword = createHmac('sha256', salt).update(user.password).digest('hex');
+    user.password = hashedPassword;
+    user.salt = salt;
+    next();
+});
 
-//define the collection name
-const User = new mongoose.model("SignUp_detail",userSchema)
+userSchema.static('matchPasswordAndGenerateToken', async function(email, password) {
+    const user = await this.findOne({ email });
+    if (!user) throw new Error('User Not Found');
+    
+    const userProvidedHash = createHmac('sha256', user.salt)
+                            .update(password)
+                            .digest('hex');
+    if (user.password !== userProvidedHash) throw new Error('Incorrect Password');
+    
+    const token = createTokenForUser(user);
+    return token;
+});
 
-module.exports = User
+const User = new mongoose.model("User",userSchema)
+
+module.exports = User;
