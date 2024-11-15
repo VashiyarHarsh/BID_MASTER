@@ -1,11 +1,22 @@
 const User = require('../models/users_db');
+const { uploadOnCloudinary } = require("../utils/cloudinary");
 
 const handleUserSignUp = async (req, res) => {
     const { fullName, userName, email, password } = req.body;
+    const profileImageFile = req.file;
+
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).send("Email already in use!");
-        const newUser = await User.create({ fullName, userName, email, password });
+
+        let profileImageURL = null;
+
+        if (profileImageFile) {
+            const uploadResult = await uploadOnCloudinary(profileImageFile.path);
+            profileImageURL = uploadResult ? uploadResult.url : null;
+          }
+
+        const newUser = await User.create({ fullName, userName, email, password, profileImageURL });
         return res.status(201).send(newUser);
     } catch (err) {
         console.error("Sign-up error:", err);
@@ -24,7 +35,15 @@ const handleUserSignIn = async (req, res) => {
     }
 }
 
+const ensureAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.status(401).send("Unauthorized");
+}
+
 module.exports = {
     handleUserSignUp,
     handleUserSignIn,
+    ensureAuthenticated
 }

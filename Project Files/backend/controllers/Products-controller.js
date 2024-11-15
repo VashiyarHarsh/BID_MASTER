@@ -1,5 +1,6 @@
 const Product = require("../models/product_db");
 const Category = require("../models/categories_db");
+const User = require("../models/users_db");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const fs = require("fs");
 const { get } = require("http");
@@ -7,7 +8,7 @@ const { get } = require("http");
 const addProduct = async (req, res) => {
   try {
     // console.log("Files received:", req.files); // Debugging line
-    // console.log("Data rece=eivd:", req.body.productImagesURL);
+    console.log("Data rece=eivd:", req.body);
     
     const imageFiles = req.files;
   
@@ -43,11 +44,16 @@ const addProduct = async (req, res) => {
       ...req.body,
       productImagesURL: imageUrls.filter((url) => url !== null),
       certifications: certificationsUrls.filter((url) => url !== null),
+      seller: req.user._id
     };
 
 
     // Create the new product
     const newProduct = await Product.create(productData);
+    const user = await User.findById(req.user._id);
+    user.unsoldItems.push(newProduct._id);
+    await user.save();
+    
     const category = await Category.findOne({ name: req.body.category });
    
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
