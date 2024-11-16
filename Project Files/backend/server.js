@@ -5,20 +5,23 @@ const PORT = process.env.PORT;
 const mongoose = require("mongoose")
 const express = require("express");
 const app = express();
-const productRoute = require("./router/productRouter");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+//const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
+const productRoute = require("./router/productRouter");
 const categoryRouter = require("./router/categoryRouter");
 const userRouter = require("./router/userRouter");
 const mailRouter = require("./router/mailRouter");
 
 const corsOptions = {
-    origin: "http://localhost:5173",
-    method: "GET, POST, PUT, DELETE, PATCH, HEAD",
-    Credentials: true,
+    origin: 'http://localhost:5173', // Specify your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 };
 
+app.use(cookieParser());
 app.use(cors(corsOptions));
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));

@@ -71,6 +71,7 @@ const AddProducts = () => {
       const response = await fetch('http://localhost:5124/api/form/addProducts', {
         method: "POST",
         body: formData,
+        credentials: "include",
       });
       const data = await response.json();
 
@@ -237,6 +238,7 @@ const AddProducts = () => {
         Add Product
       </button>
     </form>
+    
   );
 };
 

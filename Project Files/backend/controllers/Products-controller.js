@@ -2,13 +2,12 @@ const Product = require("../models/product_db");
 const Category = require("../models/categories_db");
 const User = require("../models/users_db");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
-const fs = require("fs");
-const { get } = require("http");
+// const fs = require("fs");
+// const { get } = require("http");
 
 const addProduct = async (req, res) => {
   try {
     // console.log("Files received:", req.files); // Debugging line
-    console.log("Data rece=eivd:", req.body);
     
     const imageFiles = req.files;
   
@@ -44,13 +43,12 @@ const addProduct = async (req, res) => {
       ...req.body,
       productImagesURL: imageUrls.filter((url) => url !== null),
       certifications: certificationsUrls.filter((url) => url !== null),
-      seller: req.user._id
+      seller: req.user.id
     };
-
 
     // Create the new product
     const newProduct = await Product.create(productData);
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user.id);
     user.unsoldItems.push(newProduct._id);
     await user.save();
     
@@ -110,9 +108,30 @@ const getProductsByReservePriceRange = async (req, res) => {
   }
 }
 
-module.exports = { addProduct, getProductsBySearch, getLatestCreatedProducts, getOldestCreatedProducts, getProductsByReservePriceRange };
+const verifyProduct = async (req, res) => {
+  const { productId } = req.params;
+  try {
+      const product = await Product.findById(productId);
+      if (!product) {
+          return res.status(404).send("Product not found");
+      }
+      product.productStatus = "verified";
+      await product.save();
+      res.status(200).send({
+          message: "Product status updated to verified",
+          product,
+      });
+  } catch (err) {
+      console.error("Error verifying product:", err);
+      res.status(500).send("Internal Server Error");
+  }
+}
 
-
-
-
-
+module.exports = { 
+  addProduct, 
+  getProductsBySearch, 
+  getLatestCreatedProducts, 
+  getOldestCreatedProducts, 
+  getProductsByReservePriceRange,
+  verifyProduct
+};
