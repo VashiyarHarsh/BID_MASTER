@@ -1,99 +1,92 @@
-
+/* General Footer Styles */
 .footer {
-    background-color: #f4f1e3; 
-    color: #333; 
-    padding: 40px 0;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    border-top: 2px solid #d3b58f;
-  }
-  
-  .footer .container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .footer-section {
-    flex: 1;
-    margin: 0 15px;
-    min-width: 250px;
-    
-  }
-  
-  .footer-logo {
-    width: 80px;
-    margin-bottom: 10px;
-  }
-  
-  .footer-section h2,
-  .footer-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .footer-section p {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    line-height: 1.6;
-  }
-  
-  .footer-section a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .footer-section a:hover {
-    color: #c69953; 
-  }
-  
-  .map iframe {
-    border-radius: 8px;
-  }
-  
+  background-color: #1C1F26;
+  color: white;
+  padding: 20px 0; /* Add vertical padding for the footer */
+  position: static; /* Footer is not fixed */
+  width: 100%; /* Occupies the full width of the page */
+  text-align: center; /* Center-align all text */
+  font-family: "Montserrat", sans-serif;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for sliding in */
+  transform: translateY(100%); /* Initially hide the footer by sliding it down */
+}
 
-  .social-icons {
-    margin-top: 15px;
+.footer.visible {
+  transform: translateY(0); /* Slide the footer up when visible */
+}
+
+/* Flex container for the footer sections */
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* Equal spacing between columns */
+  align-items: center; /* Vertically aligns content */
+  text-align: center; /* Center-aligns text within columns */
+  padding: 0 5%; /* Add horizontal padding for spacing */
+  margin: 0 auto; /* Centers the footer on the page */
+  max-width: 1200px; /* Sets a max width for the container */
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Footer Columns */
+.footer-section {
+  flex: 1; /* Ensures all columns take equal width */
+  padding: 10px 20px; /* Consistent padding inside columns */
+  margin: 0 10px; /* Adds spacing between columns */
+  text-align: center; /* Ensures text inside each column is center-aligned */
+  box-sizing: border-box; /* Includes padding and margin in width calculations */
+  min-width: 180px; /* Ensures columns have a minimum width */
+}
+
+/* Footer Headings */
+.footer-section h3 {
+  font-size: 18px;
+  color: rgba(252, 185, 0, 1); /* Yellow color for headings */
+  margin-bottom: 10px;
+}
+
+/* Footer Text */
+/* Footer Text */
+.footer-section p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px; /* Reduced font size from 14px to 12px */
+  color: #abb8c3; /* Slightly muted text */
+  line-height: 1.5; /* Ensures proper spacing between lines */
+  margin: 5px 0; /* Adds some vertical spacing between paragraphs */
+}
+
+.map iframe {
+  border: none; /* Removes border around the map */
+  border-radius: 8px; /* Adds rounded corners */
+  width: 100%; /* Makes the map responsive */
+  max-width: 300px; /* Limits the maximum width */
+  height: 200px; /* Sets the height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: #333;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #c69953; 
+}
+
+/* Mobile View Styling */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stacks columns vertically */
+    gap: 20px; /* Adds space between stacked columns */
   }
-  
-  .social-icons a {
-    margin: 0 10px;
-    color: #333;
-    font-size: 1.5rem;
-    transition: color 0.3s;
+
+  .footer-column {
+    width: 100%; /* Columns take the full width of the footer */
   }
-  
-  .social-icons a:hover {
-    color: #c69953; 
-  }
-  
- 
-  .footer-bottom {
-    margin-top: 40px;
-    padding: 20px 0;
-    background-color: #e2dbc1; 
-    color: #333;
-    font-size: 0.9rem;
-    border: 2px solid #d3b58f;
-  }
-  
-  .footer-bottom p {
-    margin: 0;
-  }
-  
-  /* Media Queries */
-  /* @media (max-width: 768px) {
-    .footer .container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .footer-section {
-      margin: 20px 0;
-      text-align: center;
-    }
-  } */
-  
+}
