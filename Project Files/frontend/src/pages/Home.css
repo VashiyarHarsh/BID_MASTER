@@ -1,0 +1,146 @@
+/* General */
+.app {
+  font-family: Arial, sans-serif;
+  background-color: #F4F1E3;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+}
+.container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* max-width: 1024px; */
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-row {
+    flex-direction: row;
+  }
+}
+
+.text-center {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.text-center h2 {
+  margin: 30px;
+}
+p {
+  font-size: large;
+}
+/* Hero Section */
+.hero-section {
+  background-color: #E2DBC1;
+  padding: 48px 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 290px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  color: black;
+}
+
+.highlight {
+  color: #2563eb;
+}
+.highlight1{
+  color: black;
+}
+
+.description {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+#img1 {
+  width: 500px;
+  margin-top: 350px;
+}
+
+#img2 {
+  width: 900px;
+}
+#img3 {
+  width: 500px;
+  margin: 80px;
+}
+
+
+.image-rounded {
+  border-radius: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Features Section */
+.features-section {
+  padding: 48px 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.feature-description {
+  color: #6b7280;
+}
+
+/* Profile Section */
+.profile-section,
+.bid-section {
+  background-color: #E2DBC1;
+  padding: 48px 0;
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #1e3a8a;
+}
