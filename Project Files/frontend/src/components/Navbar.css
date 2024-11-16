@@ -1,101 +1,123 @@
-
+/* Reset default margin and padding */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
-  header {
-    background-color: #f5f5dc; 
-    padding: 10px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #d3b58f;
-    border-top: 2px solid #d3b58f;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%; 
-    z-index: 1000; 
-  }
-  
+/* Navbar Container */
+.navbar {
+  background-color: #1C1F26;
+  padding: 27px 0;
+  top: 0;
+  left: 0;
+  height: 100px;
+  position: fixed;
+  width: 100%;
+  z-index: 2000;
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo-brand {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    flex-grow: 1;
-  }
-  
-  .logo-brand a {
-    color: #6b4f28; 
-    text-decoration: none;
-    transition: color 0.3s ease;
-    
-  }
-  
-  .logo-brand a:hover {
-    color: #a0522d; 
-  }
+/* Flex Container for Navbar Content */
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
 
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    justify-content: flex-end;
-  }
-  
-  nav ul li {
-    font-size: 1.1rem;
-    right: 2px;
-  }
- 
-  nav ul li a {
-    text-decoration: none;
-    color: #6b4f28; 
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-  }
-  
-  nav ul li a:hover {
-    background-color: #d3b58f; 
-    color: #fff;
-  }
+/* Logo Styling */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 20px;
+  margin-left: 50px;
+}
 
-  nav ul li a.active {
-    font-weight: bold;
-    border-bottom: 2px solid #a0522d;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    nav ul {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    .container {
-      flex-direction: column;
-    }
-  }
-  
-/* to be adjusted */
 
-  body {
-    padding-top: 60px; 
-  }
-  
+/* General styling for BidMaster text */
+.bidmaster {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: rgba(255, 255, 255, 1); /* Default white color */
+}
+
+/* Highlighting the "iD" part in yellow */
+.id-highlight {
+  color: rgba(252, 185, 0, 1); /* Yellow color */
+}
+
+/* Navigation Links Styling */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 46px;
+  padding: 0;
+  margin: 0;
+  margin-left: 630px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+  position: relative; /* Needed for positioning the pseudo-element */
+}
+
+/* Targeting the "Add Products" link (3rd item) */
+.nav-links li:nth-child(3) {
+  margin-right: 80px; /* Increase space between "Add Products" and "Sign In" */
+}
+
+
+
+nav ul li a {
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif; /* Updated font for navigation links */
+  font-size: 14px; /* Adjusted font size to match image */
+  font-weight: 800; /* Regular font weight for links */
+  color: rgba(255, 255, 255, 1); /* White color */
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effect: White line appears above the word */
+nav ul li a::before {
+  content: "";
+  position: absolute;
+  left: 50%; /* Starts from the center */
+  top: -5px; /* Moves the line 5px above the word */
+  width: 0; /* Initial width of the line */
+  height: 2px; /* Line height */
+  background-color: white; /* White color for the line */
+  transition: width 0.3s ease, left 0.3s ease; /* Smooth transition for width and position */
+}
+
+/* On hover, expand the line */
+nav ul li a:hover::before {
+  width: 40%; /* Set maximum width for the line */
+  left: 30%; /* Center the line */
+}
+
+/* Active Link Styling */
+.active {
+  color: rgba(252, 185, 0, 1); /* Yellow for active links */
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
