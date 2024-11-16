@@ -7,14 +7,17 @@ export const Footer = () => {
       <div className="container">
         
         <div className="footer-section">
-          <h2>BIDMASTER--</h2>
+          
+          <div class="bidmaster">
+          <span>B</span><span class="id-highlight">iD</span><span>Master</span>
+        </div>
           <p>
             Welcome to Bidmaster, where we provide online auction facilities.
           </p>
         </div>
 
         <div className="footer-section">
-          <h3><u>Company Address</u></h3>
+          <h3>Company Address</h3>
           <p>
             Dhirubhai Ambani Institute of Information and Communication
             Technology, Near Indroda Circle, Gandhinagar - 382 007, Gujarat
@@ -34,12 +37,12 @@ export const Footer = () => {
         </div>
 
         <div className="footer-section">
-          <h3><u>Contact Information</u></h3>
+          <h3>Contact Us</h3>
           <p>
-            <strong>Email:</strong> <a href="mailto:bidmaster@gmail.com">bidmaster@gmail.com</a>
+            <strong>Email</strong> <a href="mailto:bidmaster@gmail.com">bidmaster@gmail.com</a>
           </p>
           <p>
-            <strong>Phone:</strong> +91 1234567890
+            <strong>Phone</strong> +91 1234567890
           </p>
 
           <div className="social-icons">
@@ -58,6 +61,7 @@ export const Footer = () => {
               </i>
             </a>
           </div>
+
         </div>
       </div>
 
