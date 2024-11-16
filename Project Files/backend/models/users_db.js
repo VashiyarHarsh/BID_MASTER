@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { createHmac, randomBytes } = require("node:crypto");
-const { createTokenForUser } = require('../utils/authentication');
+const { createTokenForUser, setAuthCookie } = require('../utils/authentication');
 
 const userSchema = new mongoose.Schema({
     fullName: {
@@ -15,8 +15,8 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        enum: ["Buyer", "Seller", "Admin"],
-        default: "Buyer",
+        enum: ["User", "Admin"],
+        default: "User",
     },
     email: {
         type: String,
@@ -29,11 +29,9 @@ const userSchema = new mongoose.Schema({
     profileImageURL: {
         type: String,
         required: false,
-        // default: "/images/default-profile-image.jpg",
     },
     salt: { 
         type: String,
-        //required: true,
     },
     DOB: {
         type: Date,
@@ -82,6 +80,6 @@ userSchema.static('matchPasswordAndGenerateToken', async function(email, passwor
     return token;
 });
 
-const User = new mongoose.model("User",userSchema)
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

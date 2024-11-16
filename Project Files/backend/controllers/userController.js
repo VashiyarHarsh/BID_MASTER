@@ -1,5 +1,6 @@
 const User = require('../models/users_db');
 const { uploadOnCloudinary } = require("../utils/cloudinary");
+const { setCookie, clearCookie } = require('../utils/authentication');
 
 const handleUserSignUp = async (req, res) => {
     const { fullName, userName, email, password } = req.body;
@@ -14,7 +15,7 @@ const handleUserSignUp = async (req, res) => {
         if (profileImageFile) {
             const uploadResult = await uploadOnCloudinary(profileImageFile.path);
             profileImageURL = uploadResult ? uploadResult.url : null;
-          }
+        }
 
         const newUser = await User.create({ fullName, userName, email, password, profileImageURL });
         return res.status(201).send(newUser);
@@ -26,24 +27,22 @@ const handleUserSignUp = async (req, res) => {
 
 const handleUserSignIn = async (req, res) => {
     const { email, password } = req.body;
-    try{
+    try {
         const token = await User.matchPasswordAndGenerateToken(email, password);
-        return res.status(200).send(token);
+        setCookie(res, 'token', token, { maxAge: 24 * 60 * 60 * 1000 });
+        return res.status(200).send("done che");
+    } catch (error) {
+        return res.status(401).send("Invalid email or password");
     }
-    catch(err){
-        return res.status(400).send("Internal Server Error: " + err.message);
-    }
-}
+};
 
-const ensureAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.status(401).send("Unauthorized");
-}
+const handleUserSignOut = (req, res) => {
+    clearCookie(res, 'token');
+    res.status(200).send("Logged out successfully");
+};
 
 module.exports = {
     handleUserSignUp,
     handleUserSignIn,
-    ensureAuthenticated
-}
+    handleUserSignOut,
+};

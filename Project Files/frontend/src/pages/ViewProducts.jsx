@@ -1,8 +1,10 @@
 import "./ViewProducts.css";
+import VerifyButton from "../components/VerifyButton";
+
 export const ViewProducts = () =>{
     return(
         
-        <h1>Hello View Products </h1>
+       <VerifyButton/>
         
     ) 
 };
