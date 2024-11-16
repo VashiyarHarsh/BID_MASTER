@@ -31,10 +31,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    // finalPrice: {
-    //     type: Number,
-    //     default: 0
-    // },
+    finalPrice: {
+        type: Number,
+        default: 0
+    },
     certifications: {
         type: [String], // Array of image URLs or file paths
         required: true,
@@ -55,10 +55,15 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    // seller: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'USER'
-    // },
+    productStatus: {
+        type: String,
+        enum: ["unverified", "verified", "sold"],
+        default: "unverified"
+    },
+    seller: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }
     // bids: [{
     //     bidder: { 
     //         type: mongoose.Schema.ObjectId, 

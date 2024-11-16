@@ -26,11 +26,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // profileImageURL: {
-    //     type: String,
-    //     required: true,
-    //     default: "/images/default-profile-image.jpg",
-    // },
+    profileImageURL: {
+        type: String,
+        required: false,
+        // default: "/images/default-profile-image.jpg",
+    },
     salt: { 
         type: String,
         //required: true,
@@ -43,12 +43,18 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: false,
     },
-    // soldItems: {
-    //     type: [mongoose.Schema.Types.ObjectId],
-    // },
-    // boughtItems: {
-    //     type: [mongoose.Schema.Types.ObjectId],
-    // }
+    soldItems: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: false,
+    },
+    unsoldItems: {
+        type: [mongoose.Schema.Types.ObjectId],     
+        required: false,
+    },
+    boughtItems: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: false,
+    }
 }, { timestamps: true });
 
 userSchema.pre('save', function (next) {
