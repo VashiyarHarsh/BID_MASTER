@@ -1,80 +1,174 @@
-import React, { useEffect } from 'react';
-import styles from './SignupAndLogin.module.css';
+import React, { useState } from 'react';
+import styles from './SignupAndLogin.module.css';  // Import the CSS module
 
-const SignupAndLogin = () => {
-    useEffect(() => {
-        const container = document.getElementById('container');
-        const registerBtn = document.getElementById('register');
-        const loginBtn = document.getElementById('login');
+export default function SignupAndLogin() {
+    const [isLogin, setIsLogin] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [formError, setFormError] = useState('');
 
-        const activateRegister = () => container.classList.add(styles.active);
-        const deactivateRegister = () => container.classList.remove(styles.active);
+    const validateEmail = (email) => {
+        return email.includes('@');
+    };
 
-        registerBtn.addEventListener('click', activateRegister);
-        loginBtn.addEventListener('click', deactivateRegister);
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        setEmailError('');
+        setPasswordError('');
+        setFormError('');
 
-        return () => {
-            registerBtn.removeEventListener('click', activateRegister);
-            loginBtn.removeEventListener('click', deactivateRegister);
-        };
-    }, []);
+        // Validate email format
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address');
+            return;
+        }
+
+        // Check if all fields are filled
+        if (!email || !password || !confirmPassword || !username) {
+            setFormError('All fields are required');
+            return;
+        }
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            setPasswordError('Passwords do not match');
+            return;
+        }
+
+        console.log('Form Submitted');
+        // Proceed with form submission (API call, etc.)
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setEmailError(''); // Clear previous email error
+
+        // Validate email format
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address');
+        } else if (!email || !password) {
+            setFormError('Email and Password are required');
+        } else {
+            console.log('Login Submitted');
+            // You can add your login logic here (API call, etc.)
+        }
+    };
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
+
+        if (value && !validateEmail(value)) {
+            setEmailError('Please enter a valid email address');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+
+        if (confirmPassword && value !== confirmPassword) {
+            setPasswordError('Passwords do not match');
+        } else {
+            setPasswordError('');
+        }
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        const value = e.target.value;
+        setConfirmPassword(value);
+
+        if (password && value !== password) {
+            setPasswordError('Passwords do not match');
+        } else {
+            setPasswordError('');
+        }
+    };
 
     return (
-        <div className={styles.container} id="container">
-            <meta charSet="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-            <title>Modern Login Page</title>
-
-            <div className={`${styles['form-container']} ${styles['sign-up']}`}>
-                <form>
-                    {/* <h1>Create Account</h1> */}
-                    <div className={styles['social-icons']}>
-                        <a href="#" className={styles.icon}><i className="fa-brands fa-google-plus-g" /></a>
-                        <a href="#" className={styles.icon}><i className="fa-brands fa-facebook-f" /></a>
-                    </div>
-                    <span>or use your email for registration</span>
-                    <input type="text" placeholder="Name" />
-                    <input type="email" placeholder="Email" />
-                    <input type="number" placeholder="Phone Number" />
-                    <input type="password" placeholder="Password" />
-                    <input type="password" placeholder="Confirm Password" />
-                    <button className={styles.butt1}>Sign Up</button>
-                </form>
-            </div>
-
-            <div className={`${styles['form-container']} ${styles['sign-in']}`}>
-                <form>
-                    <h1>Sign In</h1>
-                    <div className={styles['social-icons']}>
-                        <a href="#" className={styles.icon}><i className="fa-brands fa-google-plus-g" /></a>
-                        <a href="#" className={styles.icon}><i className="fa-brands fa-facebook-f" /></a>
-                    </div>
-                    <span>or use your email and password</span>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <a href="#">Forgot Your Password?</a>
-                    <button className={styles.butt2}>Sign In</button>
-                </form>
-            </div>
-
-            <div className={styles['toggle-container']}>
-                <div className={styles.toggle}>
-                    <div className={`${styles['toggle-panel']} ${styles['toggle-left']}`}>
-                    <h1>Hello, Bidder!</h1>
-                    <p>Register with your personal details to use all of the site’s features</p>
-                        <button className={styles.hidden} id="login">Sign In</button>
-                    </div>
-                    <div className={`${styles['toggle-panel']} ${styles['toggle-right']}`}>
-                        
-                        <h1>Welcome Back!</h1>
-                        <p>Enter your personal details to use all of the site’s features</p>
-                        <button className={styles.hidden} id="register">Sign Up</button>
-                    </div>
+        <div className={styles.container}>
+            <div className={styles.formContainer}>
+                <div className={styles.formToggle}>
+                    <button 
+                        className={isLogin ? styles.active : ""} 
+                        onClick={() => setIsLogin(true)}
+                    >
+                        Login
+                    </button>
+                    <button 
+                        className={!isLogin ? styles.active : ""} 
+                        onClick={() => setIsLogin(false)}
+                    >
+                        SignUp
+                    </button>
                 </div>
+                
+                {isLogin ? (
+                    <div className={styles.form}>
+                        <h2>Login</h2>
+                        <input 
+                            type='email' 
+                            placeholder='Email' 
+                            value={email}
+                            onChange={handleEmailChange} 
+                            required
+                        />
+                        {emailError && <p className={styles.error}>{emailError}</p>}
+                        <input 
+                            type='password' 
+                            placeholder='Password' 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required
+                        />
+                        {formError && <p className={styles.error}>{formError}</p>}
+                        <button onClick={handleLogin}>Login</button>
+                        <p>Don't have an account? <a href='#' onClick={() => setIsLogin(false)}>Sign Up</a></p>
+                    </div>
+                ) : (
+                    <div className={styles.form}>
+                        <h2>Sign Up</h2>
+                        <input 
+                            type='text' 
+                            placeholder='Username' 
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required
+                        />
+                        {formError && <p className={styles.error}>{formError}</p>}
+                        <input 
+                            type='email' 
+                            placeholder='Email' 
+                            value={email}
+                            onChange={handleEmailChange} 
+                            required
+                        />
+                        {emailError && <p className={styles.error}>{emailError}</p>}
+                        <input 
+                            type='password' 
+                            placeholder='Password' 
+                            value={password}
+                            onChange={handlePasswordChange} 
+                            required
+                        />
+                        <input 
+                            type='password' 
+                            placeholder='Confirm Password' 
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange} 
+                            required
+                        />
+                        {passwordError && <p className={styles.error}>{passwordError}</p>}
+                        <button onClick={handleSignUp} disabled={password !== confirmPassword}>SignUp</button>
+                    </div>
+                )}
             </div>
         </div>
     );
-};
-
-export default SignupAndLogin;
+}
