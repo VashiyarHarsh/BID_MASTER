@@ -1,0 +1,97 @@
+// Import necessary modules
+const express = require("express");
+const mongoose = require("mongoose");
+const router = express.Router();
+const BidSchema = require("./models/Bid_db").schema; 
+const Product = require("./models/Product"); 
+//npm install moment
+//const moment = require("moment")// For timeout 
+
+// To get Bid Schema.......
+const getDynamicBidModel = (collectionName)=>{
+  return mongoose.models[collectionName] || mongoose.model(collectionName, BidSchema)
+}
+//Place a bid------------------------->
+app.post("/placeBid", async (req, res) => {
+  try {
+      const { productName, userEmail, BidAmt } = req.body;
+
+      if (!productName || !userEmail) {
+          return res.status(400).json({ error: "Missing required fields: productName or userEmail." });
+      }
+
+      // Dynamically determine bid amount if not provided
+      const bidAmount = BidAmt
+
+      // Collection name for the product
+      const collectionName = `bids_product_${productName.replace(/\s+/g, "_").toLowerCase()}`;
+
+      // Load the bid model dynamically
+      const BidProduct = getDynamicBidModel(collectionName);
+
+      // Check if the user already placed a bid
+      const existingBid = await BidProduct.findOne({ userEmail });
+      if (existingBid) {
+          // Update existing bid
+          existingBid.BidAmt = bidAmount;
+          existingBid.timestamp = new Date();
+          await existingBid.save();
+          return res.status(200).json({ message: "Bid updated successfully." });
+      }
+
+      // Create a new bid entry
+      const newBid = new BidProduct({
+          userEmail,
+          BidAmt: bidAmount,
+      });
+
+      await newBid.save();
+      return res.status(201).json({ message: "Bid placed successfully." });
+  } catch (error) {
+      console.error("Error placing bid:", error);
+      return res.status(500).json({ error: "Internal server error." });
+  }
+});
+  
+ module.exports = router;
+
+ //Bid enrty placed successfully.....
+
+ //-------------------------------------------------------------------------------------------------------------
+ //Timer-Out
+//UPDATE SOLD PRICE IN PRODUCT-DATABASE..............................................................
+const updateSoldPrice = async (productName) => {
+  try {
+      // Dynamically get the bids collection for the product
+      const collectionName = `bids_product_${productName.replace(/\s+/g, "_").toLowerCase()}`;
+      const BidProduct = mongoose.models[collectionName];
+
+      if (!BidProduct) {
+          console.error(`No bids collection found for product: ${productName}`);
+          return;
+      }
+
+      // Find the highest bid for the product
+      const highestBid = await BidProduct.findOne().sort({ BidAmt: -1 }); // Sort by BidAmt in descending order
+
+      // Update the sold price in the product database
+      const updatedProduct = await Product.findOneAndUpdate(
+          { name: productName }, // Assuming 'name' is the field for the product name
+          { soldPrice: highestBid.BidAmt }, // Update the sold price field
+          { new: true } // Return the updated document
+      );
+
+      if (updatedProduct) {
+          console.log(`Updated sold price for product "${productName}" to ${highestBid.BidAmt}`);
+      } else {
+          console.error(`Failed to update sold price for product "${productName}".`);
+      }
+  } catch (error) {
+      console.error(`Error updating sold price for product "${productName}":`, error);
+  }
+};
+
+//At the end, after timeout when timer turns 00:00:00:00
+//Timer logic is not workin in backend it req frontend integration..............
+//update the sold price in Product database
+
