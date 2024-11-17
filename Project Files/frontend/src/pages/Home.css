@@ -4,13 +4,10 @@
   background-color: #F4F1E3;
   margin: 0;
   padding: 0;
-  padding-top: 1200px;
 }
-
 body {
   width: 100%;
 }
-
 .container {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   /* max-width: 1024px; */
@@ -48,7 +45,7 @@ p {
   padding: 48px 0;
 }
 
-.hero-section .title {
+.title {
   font-size: 2rem;
   font-weight: bold;
   margin-top: 290px;
