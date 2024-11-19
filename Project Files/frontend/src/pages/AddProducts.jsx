@@ -84,6 +84,7 @@ const AddProducts = () => {
   };
 
   return (
+    <div className="add-products-page">
     <form onSubmit={handleSubmit} className="form-container">
       <div>
         <label htmlFor="productName" className="form-label">Product Name</label>
@@ -238,7 +239,7 @@ const AddProducts = () => {
         Add Product
       </button>
     </form>
-    
+  </div>
   );
 };
 

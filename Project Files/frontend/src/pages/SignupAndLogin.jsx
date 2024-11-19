@@ -7,9 +7,19 @@ export default function SignupAndLogin() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [username, setUsername] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [formError, setFormError] = useState('');
+    
+    // Separate error states for login and signup
+    const [loginEmailError, setLoginEmailError] = useState('');
+    const [loginPasswordError, setLoginPasswordError] = useState('');
+    const [loginFormError, setLoginFormError] = useState('');
+    
+    const [signupEmailError, setSignupEmailError] = useState('');
+    const [signupPasswordError, setSignupPasswordError] = useState('');
+    const [signupFormError, setSignupFormError] = useState('');
+    
+    const [isForgotPassword, setIsForgotPassword] = useState(false);  // State for handling forgot password view
+    const [otpError, setOtpError] = useState('');
+    const [emailForForgotPassword, setEmailForForgotPassword] = useState('');
 
     const validateEmail = (email) => {
         return email.includes('@');
@@ -17,44 +27,60 @@ export default function SignupAndLogin() {
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        setEmailError('');
-        setPasswordError('');
-        setFormError('');
+        setSignupEmailError('');
+        setSignupPasswordError('');
+        setSignupFormError('');
 
         // Validate email format
         if (!validateEmail(email)) {
-            setEmailError('Please enter a valid email address');
+            setSignupEmailError('Please enter a valid email address');
             return;
         }
 
         // Check if all fields are filled
         if (!email || !password || !confirmPassword || !username) {
-            setFormError('All fields are required');
+            setSignupFormError('All fields are required');
             return;
         }
 
         // Check if passwords match
         if (password !== confirmPassword) {
-            setPasswordError('Passwords do not match');
+            setSignupPasswordError('Passwords do not match');
             return;
         }
 
-        console.log('Form Submitted');
+        console.log('SignUp Form Submitted');
         // Proceed with form submission (API call, etc.)
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
-        setEmailError(''); // Clear previous email error
+        setLoginEmailError(''); // Clear previous email error
+        setLoginPasswordError(''); // Clear previous password error
+        setLoginFormError('');
 
         // Validate email format
         if (!validateEmail(email)) {
-            setEmailError('Please enter a valid email address');
+            setLoginEmailError('Please enter a valid email address');
         } else if (!email || !password) {
-            setFormError('Email and Password are required');
+            setLoginFormError('Email and Password are required');
         } else {
-            console.log('Login Submitted');
+            console.log('Login Form Submitted');
             // You can add your login logic here (API call, etc.)
+        }
+    };
+
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        setOtpError(''); // Clear previous OTP error
+
+        // Validate email format
+        if (!validateEmail(emailForForgotPassword)) {
+            setOtpError('Please enter a valid email address');
+        } else {
+            console.log('OTP sent');
+            // You can add OTP sending logic here (API call, etc.)
+            setIsForgotPassword(false);  // Close the forgot password modal after submission
         }
     };
 
@@ -63,9 +89,15 @@ export default function SignupAndLogin() {
         setEmail(value);
 
         if (value && !validateEmail(value)) {
-            setEmailError('Please enter a valid email address');
+            setLoginEmailError('Please enter a valid email address');
         } else {
-            setEmailError('');
+            setLoginEmailError('');
+        }
+
+        if (value && !validateEmail(value)) {
+            setSignupEmailError('Please enter a valid email address');
+        } else {
+            setSignupEmailError('');
         }
     };
 
@@ -74,9 +106,9 @@ export default function SignupAndLogin() {
         setPassword(value);
 
         if (confirmPassword && value !== confirmPassword) {
-            setPasswordError('Passwords do not match');
+            setSignupPasswordError('Passwords do not match');
         } else {
-            setPasswordError('');
+            setSignupPasswordError('');
         }
     };
 
@@ -85,9 +117,9 @@ export default function SignupAndLogin() {
         setConfirmPassword(value);
 
         if (password && value !== password) {
-            setPasswordError('Passwords do not match');
+            setSignupPasswordError('Passwords do not match');
         } else {
-            setPasswordError('');
+            setSignupPasswordError('');
         }
     };
 
@@ -97,13 +129,23 @@ export default function SignupAndLogin() {
                 <div className={styles.formToggle}>
                     <button 
                         className={isLogin ? styles.active : ""} 
-                        onClick={() => setIsLogin(true)}
+                        onClick={() => {
+                            setIsLogin(true);
+                            setLoginEmailError(''); // Reset login errors when switching to login
+                            setLoginPasswordError('');
+                            setLoginFormError('');
+                        }}
                     >
                         Login
                     </button>
                     <button 
                         className={!isLogin ? styles.active : ""} 
-                        onClick={() => setIsLogin(false)}
+                        onClick={() => {
+                            setIsLogin(false);
+                            setSignupEmailError(''); // Reset signup errors when switching to signup
+                            setSignupPasswordError('');
+                            setSignupFormError('');
+                        }}
                     >
                         SignUp
                     </button>
@@ -119,7 +161,7 @@ export default function SignupAndLogin() {
                             onChange={handleEmailChange} 
                             required
                         />
-                        {emailError && <p className={styles.error}>{emailError}</p>}
+                        {loginEmailError && <p className={styles.error}>{loginEmailError}</p>}
                         <input 
                             type='password' 
                             placeholder='Password' 
@@ -127,9 +169,10 @@ export default function SignupAndLogin() {
                             onChange={(e) => setPassword(e.target.value)} 
                             required
                         />
-                        {formError && <p className={styles.error}>{formError}</p>}
+                        {loginFormError && <p className={styles.error}>{loginFormError}</p>}
                         <button onClick={handleLogin}>Login</button>
                         <p>Don't have an account? <a href='#' onClick={() => setIsLogin(false)}>Sign Up</a></p>
+                        <p><a href='#' onClick={() => setIsForgotPassword(true)}>Forgot Password?</a></p> {/* Forgot Password Link */}
                     </div>
                 ) : (
                     <div className={styles.form}>
@@ -141,7 +184,7 @@ export default function SignupAndLogin() {
                             onChange={(e) => setUsername(e.target.value)} 
                             required
                         />
-                        {formError && <p className={styles.error}>{formError}</p>}
+                        {signupFormError && <p className={styles.error}>{signupFormError}</p>}
                         <input 
                             type='email' 
                             placeholder='Email' 
@@ -149,7 +192,7 @@ export default function SignupAndLogin() {
                             onChange={handleEmailChange} 
                             required
                         />
-                        {emailError && <p className={styles.error}>{emailError}</p>}
+                        {signupEmailError && <p className={styles.error}>{signupEmailError}</p>}
                         <input 
                             type='password' 
                             placeholder='Password' 
@@ -164,8 +207,27 @@ export default function SignupAndLogin() {
                             onChange={handleConfirmPasswordChange} 
                             required
                         />
-                        {passwordError && <p className={styles.error}>{passwordError}</p>}
+                        {signupPasswordError && <p className={styles.error}>{signupPasswordError}</p>}
                         <button onClick={handleSignUp} disabled={password !== confirmPassword}>SignUp</button>
+                    </div>
+                )}
+
+                {/* Forgot Password Modal */}
+                {isForgotPassword && (
+                    <div className={styles.forgotPasswordContainer}>
+                        <div className={styles.forgotPasswordForm}>
+                            <h3>Forgot Password</h3>
+                            <input 
+                                type='email' 
+                                placeholder='Enter your email' 
+                                value={emailForForgotPassword}
+                                onChange={(e) => setEmailForForgotPassword(e.target.value)} 
+                                required
+                            />
+                            {otpError && <p className={styles.error}>{otpError}</p>}
+                            <button onClick={handleForgotPassword}>Send OTP</button>
+                            <button onClick={() => setIsForgotPassword(false)}>Cancel</button>
+                        </div>
                     </div>
                 )}
             </div>

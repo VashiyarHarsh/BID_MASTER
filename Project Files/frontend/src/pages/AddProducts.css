@@ -1,56 +1,72 @@
-/* addProducts.css */
+/* Add Products Page */
+.add-products-page {
+  background-color: white; 
+  min-height: 100vh; 
+  padding: 0;
+  margin: 0;
+  display: flow-root;
+  justify-content: center; 
+  align-items: center; 
+}
 
+/* Form container styling */
 .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #c2b280;
-    border-radius: 8px;
-    background-color: #f9f5e5;
-    font-family: 'Garamond', serif;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .form-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #3e2723;
-  }
-  
-  .form-input {
-    width: 100%;
-    max-width: 96.5%;
-    padding: 10px;
-    border: 1px solid #c2b280;
-    border-radius: 4px;
-    background-color: #fff;
-    margin-bottom: 15px;
-  }
-  
-  .form-textarea {
-    width: 100%;
-    max-width: 96.5%;
-    padding: 10px;
-    border: 1px solid #c2b280;
-    border-radius: 4px;
-    background-color: #fff;
-    height: 100px;
-    margin-bottom: 15px;
-  }
-  
-  .submit-button {
-    background-color: #c2b280;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .submit-button:hover {
-    background-color: #d6c48e;
-  }
-  
+  max-width: 50vw; 
+  margin: 0 auto;
+  padding: 2rem; 
+  border: 1px solid #b8b1a0;
+  border-radius: 0.5rem; 
+  background-color: #c8b158;
+  font-family: 'Montserrat', serif;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.563); 
+  margin-top: 100vh;
+}
+
+/* Styling for form labels */
+.form-label {
+  display: block;
+  margin: 1.5vh 0 0.5vh; 
+  font-weight: bold;
+  color: rgb(0, 0, 0);; 
+  transition: color 0.3s ease; 
+}
+
+
+.form-input:focus ~ .form-label,
+.form-textarea:focus ~ .form-label {
+  color: #fcb900; 
+}
+
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  max-width: 96%; 
+  padding: 1rem; 
+  border: 1px solid #c89a3d;
+  border-radius: 0.25rem; 
+  background-color: #fff;
+  margin-bottom: 2vh; 
+}
+
+
+.form-textarea {
+  height: 15vh; 
+}
+
+
+.submit-button {
+  background-color: #413e35;
+  color: #fff;
+  padding: 1rem 1.5rem; 
+  border: none;
+  border-radius: 0.25rem; 
+  cursor: pointer;
+  font-size: 1rem; 
+  font-weight: bold;
+}
+
+
+.submit-button:hover {
+  background-color: #d6c48e;
+}
