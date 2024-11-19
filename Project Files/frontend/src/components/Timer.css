@@ -1,0 +1,22 @@
+.timer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    font-family: "Arial", sans-serif; /* Clean font */
+  }
+  
+  
+  .timer-p {
+    font-size: 2rem; /* Large text */
+    font-weight: bold; /* Emphasized text */
+    color: #2c3e50; /* Dark grayish-blue text */
+    padding: 10px;
+    border: 2px solid #3498db; /* Blue border */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #ecf0f1; /* Light gray background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center;
+  }
+  
+  
