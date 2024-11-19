@@ -4,6 +4,7 @@ import AddProducts from "./pages/AddProducts";
 import {ViewProducts} from "./pages/ViewProducts";
 import {Navbar} from "./components/Navbar";
 import {Footer} from "./components/Footer";
+import { ToastContainer } from "react-toastify";
 import "./App.css"
 import UserProfile from "./pages/UserProfile"
 import SignupAndLogin from "./pages/SignupAndLogin"
@@ -18,6 +19,19 @@ const App = () => {
   return (
 
   <div>
+    {/* Global ToastContainer */}
+    <ToastContainer
+        position="bottom-center"
+        autoClose={4200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CountdownTimer from "../components/Timer.jsx";
 
 function AuctionApp() {
   const [search, setSearch] = useState("");
@@ -16,17 +17,24 @@ function AuctionApp() {
   }
 
   // Function to open modal with auction details
-  function openModal(title, startingBid, soldPrice, auctionStart, auctionEnd, category, description) {
+  function openModal(
+    title,
+    startingBid,
+    soldPrice,
+    auctionEnd,
+    category,
+    description
+  ) {
     const data = {
-        title,
-        startingBid,
-        soldPrice,
-        auctionStart,
-        auctionEnd,
-        category,
-        description,
-      };
-      setModalData(data);
+      title,
+      startingBid,
+      soldPrice,
+
+      auctionEnd,
+      category,
+      description,
+    };
+    setModalData(data);
   }
 
   // Function to close modal
@@ -151,8 +159,8 @@ function AuctionApp() {
             title: "Ragdoll Cat",
             startingBid: "£100.00",
             soldPrice: "NULL",
-            auctionStart: "7th Dec, 2024",
-            auctionEnd: "February 28, 2025",
+
+            auctionEnd: 95,
             category: "Adventure",
             description: "The Ragdoll is a cat breed with blue eyes...",
           },
@@ -160,8 +168,8 @@ function AuctionApp() {
             title: "Rumours Remaster - Fleet",
             startingBid: "£55.00",
             soldPrice: "NULL",
-            auctionStart: "1st Dec, 2024",
-            auctionEnd: "February 28, 2025",
+
+            auctionEnd: 12,
             category: "Music",
             description: "A remastered classic by Fleetwood Mac.",
           },
@@ -169,130 +177,142 @@ function AuctionApp() {
             title: "Creedence Clearwater",
             startingBid: "£75.00",
             soldPrice: "NULL",
-            auctionStart: "15th Nov, 2024",
-            auctionEnd: "January 31, 2025",
+
+            auctionEnd: 31,
             category: "Rock",
-            description: "An album that captures the essence of CCR’s music."
+            description: "An album that captures the essence of CCR’s music.",
           },
           {
-            title: "21 CD Cover LP (12\" album) - Adele",
+            title: '21 CD Cover LP (12" album) - Adele',
             startingBid: "£30.00",
             soldPrice: "NULL",
-            auctionStart: "10th Oct, 2024",
-            auctionEnd: "January 31, 2025",
+
+            auctionEnd: 32,
             category: "Pop",
-            description: "Adele’s critically acclaimed album in a special edition."
+            description:
+              "Adele's critically acclaimed album in a special edition.",
           },
           {
             title: "The Beatles - Abbey Road",
             startingBid: "£150.00",
             soldPrice: "NULL",
-            auctionStart: "5th Jan, 2025",
-            auctionEnd: "March 15, 2025",
+
+            auctionEnd: 11,
             category: "Rock",
-            description: "The iconic Abbey Road album by The Beatles."
+            description: "The iconic Abbey Road album by The Beatles.",
           },
           {
             title: "Led Zeppelin - IV",
-            startingBid: "£120.00",
+            startingBid: 15,
             soldPrice: "NULL",
-            auctionStart: "1st Mar, 2025",
-            auctionEnd: "April 10, 2025",
+
+            auctionEnd: 10,
             category: "Rock",
-            description: "A masterpiece from the legendary rock band Led Zeppelin."
+            description:
+              "A masterpiece from the legendary rock band Led Zeppelin.",
           },
           {
             title: "Michael Jackson - Thriller",
             startingBid: "£200.00",
             soldPrice: "NULL",
-            auctionStart: "10th Apr, 2025",
-            auctionEnd: "May 20, 2025",
+
+            auctionEnd: 8,
             category: "Pop",
-            description: "The record-breaking Thriller album by Michael Jackson."
+            description:
+              "The record-breaking Thriller album by Michael Jackson.",
           },
           {
             title: "Queen - Greatest Hits",
             startingBid: "£90.00",
             soldPrice: "NULL",
-            auctionStart: "20th Apr, 2025",
-            auctionEnd: "June 12, 2025",
+
+            auctionEnd: 12,
             category: "Rock",
-            description: "A collection of the greatest hits by Queen."
+            description: "A collection of the greatest hits by Queen.",
           },
           {
             title: "Eagles - Hotel California",
             startingBid: "£130.00",
             soldPrice: "NULL",
-            auctionStart: "15th Jun, 2025",
-            auctionEnd: "July 30, 2025",
+
+            auctionEnd: 15,
             category: "Rock",
-            description: "The timeless classic Hotel California by Eagles."
+            description: "The timeless classic Hotel California by Eagles.",
           },
           {
             title: "Nirvana - Nevermind",
             startingBid: "£85.00",
             soldPrice: "NULL",
-            auctionStart: "10th Jun, 2025",
-            auctionEnd: "August 15, 2025",
+
+            auctionEnd: 35,
             category: "Rock",
-            description: "The iconic Nirvana album that defined grunge music."
+            description: "The iconic Nirvana album that defined grunge music.",
           },
           {
             title: "Bob Marley - Legend",
             startingBid: "£95.00",
             soldPrice: "NULL",
-            auctionStart: "20th Jul, 2025",
-            auctionEnd: "September 5, 2025",
+
+            auctionEnd: 40,
             category: "Reggae",
-            description: "The ultimate greatest hits collection by Bob Marley."
+            description: "The ultimate greatest hits collection by Bob Marley.",
           },
           {
             title: "AC/DC - Back In Black",
             startingBid: "£110.00",
             soldPrice: "NULL",
-            auctionStart: "5th Aug, 2025",
-            auctionEnd: "October 20, 2025",
+
+            auctionEnd: 33,
             category: "Rock",
-            description: "AC/DC’s legendary album that continues to define hard rock."
+            description:
+              "AC/DC’s legendary album that continues to define hard rock.",
           },
           {
             title: "David Bowie - The Rise and Fall of Ziggy Stardust",
             startingBid: "£140.00",
             soldPrice: "NULL",
-            auctionStart: "1st Sep, 2025",
-            auctionEnd: "November 1, 2025",
+
+            auctionEnd: 37,
             category: "Rock",
-            description: "The groundbreaking album by David Bowie, marking the birth of Ziggy Stardust."
+            description:
+              "The groundbreaking album by David Bowie, marking the birth of Ziggy Stardust.",
           },
           {
             title: "Radiohead - OK Computer",
             startingBid: "£105.00",
             soldPrice: "NULL",
-            auctionStart: "15th Sep, 2025",
-            auctionEnd: "December 10, 2025",
+
+            auctionEnd: 36,
             category: "Alternative Rock",
-            description: "One of the most influential albums of the 1990s by Radiohead."
-          }
+            description:
+              "One of the most influential albums of the 1990s by Radiohead.",
+          },
         ].map((item, index) => (
           <div className="card" key={index}>
-            <img
-              src="https://via.placeholder.com/300x300"
-              alt={item.title}
-            />
+            <img src="https://via.placeholder.com/300x300" alt={item.title} />
             <h3>{item.title}</h3>
-            <p>Starting bid: <strong>{item.startingBid}</strong></p>
-            <p>Expires on: <strong>{item.auctionEnd}</strong></p>
+            <p>
+              Starting bid: <strong>{item.startingBid}</strong>
+            </p>
+            <p>
+              Expires on:{" "}
+              <strong>
+                <CountdownTimer initialDays={item.auctionEnd} />
+              </strong>
+            </p>
             <button
               className="bid-now"
-              onClick={() => openModal(
-                item.title,
-                item.startingBid,
-                item.soldPrice,
-                item.auctionStart,
-                item.auctionEnd,
-                item.category,
-                item.description
-              )}
+              onClick={() =>
+                openModal(
+                  item.title,
+                  item.startingBid,
+                  item.soldPrice,
+
+                  item.auctionEnd,
+                  item.category,
+                  item.description
+                )
+              }
             >
               Bid Now
             </button>
@@ -307,7 +327,7 @@ function AuctionApp() {
             <button className="close-btn" onClick={closeModal}>
               ×
             </button>
-            
+
             <div className="modal-body">
               <img
                 src="https://via.placeholder.com/900x400"
@@ -316,21 +336,22 @@ function AuctionApp() {
               />
               <p>{modalData.description}</p>
               <p>
-                <strong>Starting Bid:</strong> <span>{modalData.startingBid}</span>
+                <strong>Starting Bid:</strong>{" "}
+                <span>{modalData.startingBid}</span>
               </p>
-              <p><strong>Sold Price:</strong> <span>{modalData.soldPrice}</span></p>
               <p>
+                <strong>Sold Price:</strong> <span>{modalData.soldPrice}</span>
+              </p>
+              {/* <p>
                 <strong>Auction Starts:</strong>
                 <span>{modalData.auctionStart}</span>
-              </p>
+              </p> */}
               <p>
-                <strong>Auction Ends:</strong> <span>{modalData.auctionEnd}</span>
+                <strong>Category:</strong> <span>{modalData.category}</span>
               </p>
-              <p><strong>Category:</strong> <span>{modalData.category}</span></p>
             </div>
             <div className="modal-footer">
               <button className="bid-btn">Place Bid</button>
-              <button className="buy-now-btn">Buy Now</button>
             </div>
           </div>
         </div>
