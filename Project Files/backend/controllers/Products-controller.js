@@ -69,7 +69,7 @@ const addProduct = async (req, res) => {
 const getProductsBySearch = async (req, res) => {
   try {
     const { name } = req.params;
-    const products = await Product.find({ productName: name });
+    const products = await Product.find({ productName: name, productStatus: { $ne: 'unverified' } });
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
@@ -79,7 +79,7 @@ const getProductsBySearch = async (req, res) => {
 
 const getLatestCreatedProducts = async (req, res) => { 
   try {
-    const products = await Product.find().sort({ createdAt: -1 }).limit(5);
+    const products = await Product.find({ productStatus: { $ne: 'unverified' } }).sort({ createdAt: -1 }).limit(5);
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
@@ -89,7 +89,7 @@ const getLatestCreatedProducts = async (req, res) => {
 
 const getOldestCreatedProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: 1 }).limit(5);
+    const products = await Product.find({ productStatus: { $ne: 'unverified' } }).sort({ createdAt: 1 }).limit(5);
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
@@ -100,7 +100,7 @@ const getOldestCreatedProducts = async (req, res) => {
 const getProductsByReservePriceRange = async (req, res) => {
   try {
     const { min, max } = req.params;
-    const products = await Product.find({ reservePrice: { $gte: min, $lte: max } });
+    const products = await Product.find({ reservePrice: { $gte: min, $lte: max }, productStatus: { $ne: 'unverified' } });
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
@@ -127,11 +127,57 @@ const verifyProduct = async (req, res) => {
   }
 }
 
+const removeProduct = async (req, res) => {
+  const { productId } = req.params;
+  try {
+      const product = await Product.findById(productId);
+      if (!product) {
+          return res.status(404).send("Product not found");
+      }
+      const seller = await User.findById(product.seller);
+      if(!seller) {
+          return res.status(404).send("Seller not found");
+      }
+      seller.unsoldItems = seller.unsoldItems.filter(item => item.toString() !== productId);
+      await seller.save();
+      const category = await Category.findOne({ name: product.category });
+      if(!category) {
+          return res.status(404).send("Category not found");
+      }
+      const subcategory = category.subcategories.find(sub => sub.name === product.subCategory);
+      if(!subcategory) {
+          return res.status(404).send("Subcategory not found");
+      }
+      subcategory.items = subcategory.items.filter(item => item.toString() !== productId);
+      await category.save();
+      await Product.findByIdAndDelete(productId);
+      res.status(200).send({
+          message: "Product removed successfully",
+          product,
+      });
+  } catch (err) {
+      console.error("Error removing product:", err);
+      res.status(500).send("Internal Server Error");
+  }
+}
+
+const getUnverifiedProducts = async (req, res) => {
+  try {
+    const products = await Product.find({ productStatus: "unverified" });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
+  }
+}
+
 module.exports = { 
   addProduct, 
   getProductsBySearch, 
   getLatestCreatedProducts, 
   getOldestCreatedProducts, 
   getProductsByReservePriceRange,
-  verifyProduct
+  verifyProduct,
+  removeProduct,
+  getUnverifiedProducts
 };
