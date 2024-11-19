@@ -5,7 +5,7 @@ const { createTokenForUser, setAuthCookie } = require('../utils/authentication')
 const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: true,
+        required: false,
     },
     userName: {
         type: String,

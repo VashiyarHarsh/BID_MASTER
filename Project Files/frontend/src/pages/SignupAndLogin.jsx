@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styles from './SignupAndLogin.module.css';  // Import the CSS module
+import { useNavigate } from 'react-router-dom';
 
 export default function SignupAndLogin() {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [userName, setuserName] = useState('');
     
     // Separate error states for login and signup
     const [loginEmailError, setLoginEmailError] = useState('');
@@ -20,12 +22,13 @@ export default function SignupAndLogin() {
     const [isForgotPassword, setIsForgotPassword] = useState(false);  // State for handling forgot password view
     const [otpError, setOtpError] = useState('');
     const [emailForForgotPassword, setEmailForForgotPassword] = useState('');
+    const navigate = useNavigate();
 
     const validateEmail = (email) => {
         return email.includes('@');
     };
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         setSignupEmailError('');
         setSignupPasswordError('');
@@ -38,7 +41,7 @@ export default function SignupAndLogin() {
         }
 
         // Check if all fields are filled
-        if (!email || !password || !confirmPassword || !username) {
+        if (!email || !password || !confirmPassword || !userName) {
             setSignupFormError('All fields are required');
             return;
         }
@@ -49,11 +52,34 @@ export default function SignupAndLogin() {
             return;
         }
 
+        try {
+            console.log('haha')
+          const response = await fetch('http://localhost:5124/user/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({userName,fullName,email, password}),
+            credentials: 'include', // Include cookies in the request
+          });
+          console.log(response)
+          if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
+          }
+          
+          // If successful, navigate to the home page or another page
+          navigate('/');
+        } catch (err) {
+        //   setError(err.message);
+            console.log(err);
+        }
+
         console.log('SignUp Form Submitted');
         // Proceed with form submission (API call, etc.)
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setLoginEmailError(''); // Clear previous email error
         setLoginPasswordError(''); // Clear previous password error
@@ -64,13 +90,41 @@ export default function SignupAndLogin() {
             setLoginEmailError('Please enter a valid email address');
         } else if (!email || !password) {
             setLoginFormError('Email and Password are required');
-        } else {
-            console.log('Login Form Submitted');
+        } else { 
             // You can add your login logic here (API call, etc.)
+
+            try {
+                console.log('haha')
+              const response = await fetch('http://localhost:5124/user/signin', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: 'include', // Include cookies in the request
+                
+              });
+              console.log(response)
+              if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+              }
+              
+              // If successful, navigate to the home page or another page
+
+              console.log('Login Form Submitted');
+
+              navigate('/');
+            } catch (err) {
+            //   setError(err.message);
+                console.log(err);
+            }
         }
+
+        
     };
 
-    const handleForgotPassword = (e) => {
+    const handleForgotPassword = async (e) => {
         e.preventDefault();
         setOtpError(''); // Clear previous OTP error
 
@@ -78,9 +132,36 @@ export default function SignupAndLogin() {
         if (!validateEmail(emailForForgotPassword)) {
             setOtpError('Please enter a valid email address');
         } else {
+
+            try {
+                console.log('haha')
+              const response = await fetch('http://localhost:5124/mail/sendotp', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email: emailForForgotPassword}),
+                credentials: 'include', // Include cookies in the request
+              });
+              console.log(response)
+              if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+              }
+              
+              // If successful, navigate to the home page or another page
+            //   navigate('/Login');
+
             console.log('OTP sent');
             // You can add OTP sending logic here (API call, etc.)
             setIsForgotPassword(false);  // Close the forgot password modal after submission
+
+            } catch (err) {
+            //   setError(err.message);
+                console.log(err);
+            }
+
+            
         }
     };
 
@@ -180,8 +261,15 @@ export default function SignupAndLogin() {
                         <input 
                             type='text' 
                             placeholder='Username' 
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)} 
+                            value={userName}
+                            onChange={(e) => setuserName(e.target.value)} 
+                            required
+                        />
+                        <input 
+                            type='text' 
+                            placeholder='Fullname' 
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)} 
                             required
                         />
                         {signupFormError && <p className={styles.error}>{signupFormError}</p>}
