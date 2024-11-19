@@ -2,7 +2,7 @@
 .footer {
   background-color: #1C1F26;
   color: white;
-  padding: 20px 0; /* Add vertical padding for the footer */
+  padding: 2rem 0; /* Vertical padding in rem */
   position: static; /* Footer is not fixed */
   width: 100%; /* Occupies the full width of the page */
   text-align: center; /* Center-align all text */
@@ -21,17 +21,17 @@
   justify-content: space-between; /* Equal spacing between columns */
   align-items: center; /* Vertically aligns content */
   text-align: center; /* Center-aligns text within columns */
-  padding: 0 5%; /* Add horizontal padding for spacing */
+  padding: 0 5vw; /* Horizontal padding in viewport width (responsive) */
   margin: 0 auto; /* Centers the footer on the page */
-  max-width: 1200px; /* Sets a max width for the container */
+  max-width: 90%; /* Limits the maximum width */
   flex-wrap: wrap; /* Ensures responsiveness */
 }
 
 /* Footer Columns */
 .footer-section {
   flex: 1; /* Ensures all columns take equal width */
-  padding: 10px 20px; /* Consistent padding inside columns */
-  margin: 0 10px; /* Adds spacing between columns */
+  padding: 1rem 2vw; /* Consistent padding inside columns */
+  margin: 1rem; /* Adds spacing between columns */
   text-align: center; /* Ensures text inside each column is center-aligned */
   box-sizing: border-box; /* Includes padding and margin in width calculations */
   min-width: 180px; /* Ensures columns have a minimum width */
@@ -39,54 +39,55 @@
 
 /* Footer Headings */
 .footer-section h3 {
-  font-size: 18px;
+  font-size: 1.125rem; /* Adjusted font size in rem */
   color: rgba(252, 185, 0, 1); /* Yellow color for headings */
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem; /* Space between heading and text */
 }
 
 /* Footer Text */
-/* Footer Text */
 .footer-section p {
   font-family: "Montserrat", sans-serif;
-  font-size: 12px; /* Reduced font size from 14px to 12px */
+  font-size: 0.875rem; /* Font size in rem for consistency */
   color: #abb8c3; /* Slightly muted text */
   line-height: 1.5; /* Ensures proper spacing between lines */
-  margin: 5px 0; /* Adds some vertical spacing between paragraphs */
+  margin: 0.25rem 0; /* Adds some vertical spacing between paragraphs */
 }
 
 .map iframe {
   border: none; /* Removes border around the map */
-  border-radius: 8px; /* Adds rounded corners */
+  border-radius: 0.5rem; /* Rounded corners for a subtle effect */
   width: 100%; /* Makes the map responsive */
-  max-width: 300px; /* Limits the maximum width */
-  height: 200px; /* Sets the height */
+  max-width: 25rem; /* Limits the maximum width (in rem) */
+  height: 12rem; /* Height in rem for better control */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
 }
 
-
+/* Social Icons */
 .social-icons {
-  margin-top: 15px;
+  margin-top: 1rem; /* Margin in rem for vertical spacing */
 }
 
 .social-icons a {
-  margin: 0 10px;
+  margin: 0 1rem; /* Spacing between icons */
   color: #333;
-  font-size: 1.5rem;
-  transition: color 0.3s;
+  font-size: 1.5rem; /* Font size in rem for consistency */
+  transition: color 0.3s ease; /* Smooth hover effect */
 }
 
 .social-icons a:hover {
-  color: #c69953; 
+  color: #c69953; /* Color change on hover */
 }
 
 /* Mobile View Styling */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column; /* Stacks columns vertically */
-    gap: 20px; /* Adds space between stacked columns */
+    gap: 1.5rem; /* Adds space between stacked columns */
+    padding: 0 2rem; /* Adds more padding on mobile */
   }
 
-  .footer-column {
-    width: 100%; /* Columns take the full width of the footer */
+  .footer-section {
+    width: 100%; /* Footer sections take the full width */
+    padding: 1.5rem 0; /* Adjusts padding for smaller screens */
   }
 }

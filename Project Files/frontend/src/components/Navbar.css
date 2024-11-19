@@ -14,13 +14,16 @@ html, body {
 /* Navbar Container */
 .navbar {
   background-color: #1C1F26;
-  padding: 27px 0;
+  padding: 1vh 0;
   top: 0;
   left: 0;
-  height: 100px;
-  position: fixed;
+  height: 10vh;
+  position: fixed; /* Keep navbar fixed */
   width: 100%;
   z-index: 2000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Flex Container for Navbar Content */
@@ -29,26 +32,26 @@ html, body {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 2vw;
   margin: 0 auto;
 }
-
 /* Logo Styling */
 .logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-right: 20px;
-  margin-left: 50px;
+  margin-left: 10vw;
+  
 }
-
 
 /* General styling for BidMaster text */
 .bidmaster {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 32px;
-  color: rgba(255, 255, 255, 1); /* Default white color */
+  font-size: 2rem; /* Adjusted font size */
+  color: rgba(255, 255, 255, 1); /* White color */
+ 
+  
 }
 
 /* Highlighting the "iD" part in yellow */
@@ -60,35 +63,18 @@ html, body {
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 46px;
+  gap:5vw; /* Space between navigation links */
   padding: 0;
   margin: 0;
-  margin-left: 630px;
+  position: relative; /* Make sure the transform applies correctly */
+  left: 0; /* Reset any default position */
+  transform: translateX(35vw); 
 }
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav ul li {
-  margin-right: 20px;
-  position: relative; /* Needed for positioning the pseudo-element */
-}
-
-/* Targeting the "Add Products" link (3rd item) */
-.nav-links li:nth-child(3) {
-  margin-right: 80px; /* Increase space between "Add Products" and "Sign In" */
-}
-
-
 
 nav ul li a {
   text-decoration: none;
-  font-family: "Montserrat", sans-serif; /* Updated font for navigation links */
-  font-size: 14px; /* Adjusted font size to match image */
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem; /* Reduced font size for smaller navigation links */
   font-weight: 800; /* Regular font weight for links */
   color: rgba(255, 255, 255, 1); /* White color */
   position: relative;
@@ -99,18 +85,18 @@ nav ul li a {
 nav ul li a::before {
   content: "";
   position: absolute;
-  left: 50%; /* Starts from the center */
-  top: -5px; /* Moves the line 5px above the word */
-  width: 0; /* Initial width of the line */
-  height: 2px; /* Line height */
-  background-color: white; /* White color for the line */
+  left: 50%;
+  top: -0.1rem; /* Reduced vertical offset for the line */
+  width: 0;
+  height: 0.08rem; /* Reduced height for the line */
+  background-color: white;
   transition: width 0.3s ease, left 0.3s ease; /* Smooth transition for width and position */
 }
 
 /* On hover, expand the line */
 nav ul li a:hover::before {
-  width: 40%; /* Set maximum width for the line */
-  left: 30%; /* Center the line */
+  width: 40%;
+  left: 30%;
 }
 
 /* Active Link Styling */
@@ -120,4 +106,9 @@ nav ul li a:hover::before {
 
 .nav-links a.active::after {
   width: 100%;
+}
+
+/* Targeting the "Add Products" link (3rd item) */
+.nav-links li:nth-child(3) {
+  margin-right: 5vw; /* Increased space between "Add Products" and "Sign In" */
 }

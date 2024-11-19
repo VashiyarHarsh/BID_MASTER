@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-html, body {
-    font-family: Montserrat, sans-serif;
+body {
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    height: 150vh;  /* height as a percentage of the viewport */
+    margin: 1vw;
     background-color: #767676;
 }
 
@@ -14,34 +14,39 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100%;
-    padding-top: 500px;
+    height: 60vh;  /* height as a percentage of the viewport */
+    width: 98vw;  /* width as a percentage of the viewport */
+    padding-top: 1vh; /* Adjusted to bring the form box higher (from 25vh to 15vh) */
 }
 
 .formContainer {
     background-color: white;
     opacity: 0.9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    padding: 2rem;  /* using rem for more consistent scaling */
+    border-radius: 0.625rem;  /* border radius in rem for consistency */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* shadow with rem values */
+    width: 30vw;  /* width as a percentage of the viewport */
+    margin: 3vh 2vw;  /* Reduced the vertical margin (from 5vh to 3vh) */
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .formToggle {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;  /* space between form toggle buttons */
 }
 
 .formToggle button {
     width: 50%;
-    padding: 10px;
+    padding: 1rem;  /* padding in rem */
     background-color: #f3f3f3;
     border: none;
     cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px 10px 0 0;
+    font-size: 1rem;  /* font size in rem for scalability */
+    border-radius: 0.625rem 0.625rem 0 0;
 }
 
 .formToggle .active {
@@ -55,48 +60,45 @@ html, body {
 }
 
 .form h2 {
-    display: flex;
-    margin-bottom: 20px;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 2rem;  /* margin in rem for consistency */
+    text-align: center;
 }
 
 .form input {
-    padding: 10px;
-    margin-bottom: 5px;  /* Reduced margin to bring the input fields and error messages closer */
+    padding: 1rem;
+    margin-bottom: 0.5rem;  /* margin in rem for consistency */
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 0.3125rem;  /* border radius in rem */
     transition: border 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 0.3rem;
 }
 
 .form input:focus {
     outline: none;
     border-color: black;
-    box-shadow: 0 0 5px black; /* Subtle glowing effect */
+    box-shadow: 0 0 0.3125rem black; /* subtle glow effect with rem */
 }
 
 .form button {
-    padding: 10px;
+    padding: 1rem;
     background-color: rgba(252, 185, 0, 1);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem;  /* consistent border radius */
     cursor: pointer;
 }
 
 .form a {
     color: #007bff;
     text-decoration: none;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     text-align: right;
 }
 
 .form p {
-    padding-top: 5px;  /* Reduced padding to move the error message closer to the input field */
-    text-align: left;  /* Align the error message to the left */
-    font-size: 14px;
-    color: red;  /* Ensure error messages are highlighted in red */
+    padding-top: 0.5rem;  /* reduced padding for better alignment */
+    text-align: center;
+    font-size: 0.875rem;  /* smaller font size in rem */
+    color: red;
 }
 
 .form .error {
@@ -108,5 +110,74 @@ html, body {
     color: red;
     font-size: 0.9rem;
     margin-top: 0.3rem;
-    display: none; /* Hidden by default */
-  }
+    display: none;
+}
+
+/* Forgot password container */
+.forgotPasswordContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* full viewport width */
+    height: 100vh; /* full viewport height */
+    background-color: rgba(0, 0, 0, 0.5);  /* dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgotPasswordForm {
+    background-color: white;
+    padding: 2rem;  /* padding in rem */
+    border-radius: 0.625rem;  /* border radius in rem */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* shadow in rem */
+    width: 30vw;  /* width as a percentage of the viewport */
+    text-align: center;
+}
+
+.forgotPasswordForm input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.3125rem;  /* border radius in rem */
+    border: 1px solid #ddd;
+}
+
+.forgotPasswordForm button {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background-color: #1C1F26;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+}
+
+.forgotPasswordForm button:hover {
+    background-color: #444;
+}
+
+/* Input placeholder styling */
+.form input::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    color: #999;
+    font-weight: 400;
+}
+
+/* Apply Montserrat font to the entire page */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+footer {
+    width: 100vw; /* ensure footer spans the full viewport width */
+    text-align: center;
+    padding: 1rem;  /* padding in rem for consistency */
+    background-color: #333;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: 'Montserrat', sans-serif;
+}
