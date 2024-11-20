@@ -12,6 +12,7 @@ import LiveAuctionPage from './pages/LiveAuctionPage';
 import ProtectedRoute from "./components/ProtectedRoute";
 import SignOut from "./pages/SignOut"
 import Custom from "./pages/Custom"
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 const App = () => {
   return (
@@ -37,9 +38,10 @@ const App = () => {
         <Route path="/ViewProducts" element={<ViewProducts />} />
         <Route path="/Login" element={<SignupAndLogin/>}/>
         <Route path="/SignOut" element={<SignOut/>}/>
+        <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route element={<ProtectedRoute/>}>
-         <Route path="/AddProducts" element={<AddProducts />} />
-         <Route path="/profile" element={<UserProfile/>}/>
+        <Route path="/AddProducts" element={<AddProducts />} />
+        <Route path="/profile" element={<UserProfile/>}/>
         <Route path="/BidLive" element={<LiveAuctionPage productImage="https://via.placeholder.com/300" initialPrice={4000} />} />
         </Route>
       </Routes>

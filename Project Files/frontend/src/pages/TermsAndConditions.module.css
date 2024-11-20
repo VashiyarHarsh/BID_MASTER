@@ -1,0 +1,34 @@
+/* body{
+  padding : 30%;
+  margin-top : 50%
+} */
+.terms-container {
+    padding: 90%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .terms-container h1 {
+    color: #1a73e8;
+    margin-bottom: 20px;
+  }
+  
+  .terms-container h2 {
+    margin-top: 20px;
+    color: #444;
+  }
+  
+  .terms-container ul {
+    margin-left: 20px;
+  }
+  
+  .terms-container a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  
+  .terms-container a:hover {
+    text-decoration: underline;
+  }
+  
