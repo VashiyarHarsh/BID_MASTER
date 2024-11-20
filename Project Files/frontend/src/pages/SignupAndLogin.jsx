@@ -19,6 +19,9 @@ export default function SignupAndLogin() {
     const [signupPasswordError, setSignupPasswordError] = useState('');
     const [signupFormError, setSignupFormError] = useState('');
     
+    const [agreeToTerms, setAgreeToTerms] = useState(false); // State for the checkbox
+    const [termsError, setTermsError] = useState(''); // State for the error message
+
     const [isForgotPassword, setIsForgotPassword] = useState(false);  // State for handling forgot password view
     const [otpError, setOtpError] = useState('');
     const [emailForForgotPassword, setEmailForForgotPassword] = useState('');
@@ -52,8 +55,16 @@ export default function SignupAndLogin() {
             return;
         }
 
+        // Check if terms and conditions are agreed
+        if (!agreeToTerms) {
+            setTermsError('You must agree to the terms and conditions');
+            return;
+        } else {
+            setTermsError(''); // Clear error if checkbox is checked
+        }
+
+
         try {
-            console.log('haha')
           const response = await fetch('http://localhost:5124/user/signup', {
             method: 'POST',
             headers: {
@@ -94,7 +105,7 @@ export default function SignupAndLogin() {
             // You can add your login logic here (API call, etc.)
 
             try {
-                console.log('haha')
+              
               const response = await fetch('http://localhost:5124/user/signin', {
                 method: 'POST',
                 headers: {
@@ -134,7 +145,6 @@ export default function SignupAndLogin() {
         } else {
 
             try {
-                console.log('haha')
               const response = await fetch('http://localhost:5124/mail/sendotp', {
                 method: 'POST',
                 headers: {
@@ -296,9 +306,33 @@ export default function SignupAndLogin() {
                             required
                         />
                         {signupPasswordError && <p className={styles.error}>{signupPasswordError}</p>}
+                        
+                        <div>
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                checked={agreeToTerms}
+                                onChange={(e) => setAgreeToTerms(e.target.checked)}
+                            />
+                            <label htmlFor="terms" className="text-black text-sm">
+                                I agree to the terms and conditions 
+                                    <a 
+                                        href="/TermsAndConditions" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className={styles.termsLink}
+                                    >
+                                     T&C
+                                    </a>
+                                </label>
+                            
+                        </div>
+                        {termsError && <p className={styles.error}>{termsError}</p>} {/* Display error */}
+                        
                         <button onClick={handleSignUp} disabled={password !== confirmPassword}>SignUp</button>
                     </div>
                 )}
+                    
 
                 {/* Forgot Password Modal */}
                 {isForgotPassword && (

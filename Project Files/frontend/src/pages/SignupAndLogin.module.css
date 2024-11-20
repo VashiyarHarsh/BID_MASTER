@@ -10,6 +10,10 @@ body {
     background-color: #767676;
 }
 
+label {
+    color: black !important;
+}
+
 .container {
     display: flex;
     justify-content: center;
