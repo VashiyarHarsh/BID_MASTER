@@ -10,8 +10,6 @@ import UserProfile from "./pages/UserProfile"
 import SignupAndLogin from "./pages/SignupAndLogin"
 import LiveAuctionPage from './pages/LiveAuctionPage';
 import ProtectedRoute from "./components/ProtectedRoute";
-import SignUp from "./pages/SignUp"
-import SignIn from "./pages/SignInCustom"
 import SignOut from "./pages/SignOut"
 import Custom from "./pages/Custom"
 
@@ -38,8 +36,6 @@ const App = () => {
         <Route path="/Custom" element={<Custom/>}/>
         <Route path="/ViewProducts" element={<ViewProducts />} />
         <Route path="/Login" element={<SignupAndLogin/>}/>
-        <Route path="/Signup" element={<SignUp/>}/>
-        <Route path="/SignIn" element={<SignIn/>}/>
         <Route path="/SignOut" element={<SignOut/>}/>
         <Route element={<ProtectedRoute/>}>
          <Route path="/AddProducts" element={<AddProducts />} />
