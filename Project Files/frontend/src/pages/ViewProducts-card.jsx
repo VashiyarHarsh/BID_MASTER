@@ -156,15 +156,16 @@ function AuctionApp() {
       <div className="cards-container">
         {[
           {
+            id: "ragdoll_cat", // Unique ID for the product
             title: "Ragdoll Cat",
             startingBid: "£100.00",
             soldPrice: "NULL",
-
             auctionEnd: 95,
             category: "Adventure",
             description: "The Ragdoll is a cat breed with blue eyes...",
           },
           {
+            id: "rumours_remaster_fleet",
             title: "Rumours Remaster - Fleet",
             startingBid: "£55.00",
             soldPrice: "NULL",
@@ -174,6 +175,7 @@ function AuctionApp() {
             description: "A remastered classic by Fleetwood Mac.",
           },
           {
+            id: "creedence_clearwater",
             title: "Creedence Clearwater",
             startingBid: "£75.00",
             soldPrice: "NULL",
@@ -183,35 +185,36 @@ function AuctionApp() {
             description: "An album that captures the essence of CCR’s music.",
           },
           {
+            id: "21_cd_cover_LP_(12' album)_Adele",
             title: '21 CD Cover LP (12" album) - Adele',
             startingBid: "£30.00",
             soldPrice: "NULL",
-
             auctionEnd: 32,
             category: "Pop",
             description:
               "Adele's critically acclaimed album in a special edition.",
           },
           {
+            id: "the_beatles_abbey_road",
             title: "The Beatles - Abbey Road",
             startingBid: "£150.00",
             soldPrice: "NULL",
-
             auctionEnd: 11,
             category: "Rock",
             description: "The iconic Abbey Road album by The Beatles.",
           },
           {
+            id: "led_zeppelin_iv",
             title: "Led Zeppelin - IV",
             startingBid: 15,
             soldPrice: "NULL",
-
             auctionEnd: 10,
             category: "Rock",
             description:
               "A masterpiece from the legendary rock band Led Zeppelin.",
           },
           {
+            id: "michael_jackson_thriller",
             title: "Michael Jackson - Thriller",
             startingBid: "£200.00",
             soldPrice: "NULL",
@@ -222,73 +225,73 @@ function AuctionApp() {
               "The record-breaking Thriller album by Michael Jackson.",
           },
           {
+            id: "queen_greatest_hits",
             title: "Queen - Greatest Hits",
             startingBid: "£90.00",
             soldPrice: "NULL",
-
             auctionEnd: 12,
             category: "Rock",
             description: "A collection of the greatest hits by Queen.",
           },
           {
+            id: "eagles_hotel_california",
             title: "Eagles - Hotel California",
             startingBid: "£130.00",
             soldPrice: "NULL",
-
             auctionEnd: 15,
             category: "Rock",
             description: "The timeless classic Hotel California by Eagles.",
           },
           {
+            id: "nirvana_nevermind",
             title: "Nirvana - Nevermind",
             startingBid: "£85.00",
             soldPrice: "NULL",
-
             auctionEnd: 35,
             category: "Rock",
             description: "The iconic Nirvana album that defined grunge music.",
           },
           {
+            id: "bob_marley_legend",
             title: "Bob Marley - Legend",
             startingBid: "£95.00",
             soldPrice: "NULL",
-
             auctionEnd: 40,
             category: "Reggae",
             description: "The ultimate greatest hits collection by Bob Marley.",
           },
           {
+            id: "ac/dc_ack_in_black",
             title: "AC/DC - Back In Black",
             startingBid: "£110.00",
             soldPrice: "NULL",
-
             auctionEnd: 33,
             category: "Rock",
             description:
               "AC/DC’s legendary album that continues to define hard rock.",
           },
           {
+            id: "david_bowie_the_rise_and_fall_of_ziggy_stardust",
             title: "David Bowie - The Rise and Fall of Ziggy Stardust",
             startingBid: "£140.00",
             soldPrice: "NULL",
-
             auctionEnd: 37,
             category: "Rock",
             description:
               "The groundbreaking album by David Bowie, marking the birth of Ziggy Stardust.",
           },
           {
+            id: "radiohead_ok_computer",
             title: "Radiohead - OK Computer",
             startingBid: "£105.00",
             soldPrice: "NULL",
-
             auctionEnd: 36,
             category: "Alternative Rock",
             description:
               "One of the most influential albums of the 1990s by Radiohead.",
           },
         ].map((item, index) => (
-          <div className="card" key={index}>
+          <div className="card" key={item.id}>
             <img src="https://via.placeholder.com/300x300" alt={item.title} />
             <h3>{item.title}</h3>
             <p>
@@ -297,7 +300,7 @@ function AuctionApp() {
             <p>
               Expires on:{" "}
               <strong>
-                <CountdownTimer initialDays={item.auctionEnd} />
+                <CountdownTimer auctionId={item.id} initialDays={item.auctionEnd} />
               </strong>
             </p>
             <button
@@ -307,7 +310,6 @@ function AuctionApp() {
                   item.title,
                   item.startingBid,
                   item.soldPrice,
-
                   item.auctionEnd,
                   item.category,
                   item.description
