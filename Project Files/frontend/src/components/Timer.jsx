@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from "react";
 import './Timer.css';
 
-const CountdownTimer = ({ initialDays }) => {
-  const [timeLeft, setTimeLeft] = useState(initialDays * 24 * 60 * 60 * 1000);
+const CountdownTimer = ({ auctionId, initialDays }) => {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const savedEndTime = localStorage.getItem(`auction_${auctionId}`);
+    if (savedEndTime) {
+      const remainingTime = new Date(savedEndTime).getTime() - Date.now();
+      return remainingTime > 0 ? remainingTime : 0;
+    }
+    const endTime = Date.now() + initialDays * 24 * 60 * 60 * 1000;
+    localStorage.setItem(`auction_${auctionId}`, new Date(endTime).toISOString());
+    return initialDays * 24 * 60 * 60 * 1000;
+  });
 
   useEffect(() => {
+    if (timeLeft <= 0) return;
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
-        if (prevTime <= 1000) {
+        const newTime = prevTime - 1000;
+        if (newTime <= 0) {
           clearInterval(timer);
           return 0;
         }
-        return prevTime - 1000;
+        return newTime;
       });
     }, 1000);
 
     return () => clearInterval(timer); // Cleanup on unmount
-  }, []);
+  }, [timeLeft]);
 
   const formatTime = (time) => {
     const days = Math.floor(time / (24 * 60 * 60 * 1000));
@@ -34,6 +46,3 @@ const CountdownTimer = ({ initialDays }) => {
 };
 
 export default CountdownTimer;
-
-// Usage
-// <CountdownTimer initialDays={32} />
