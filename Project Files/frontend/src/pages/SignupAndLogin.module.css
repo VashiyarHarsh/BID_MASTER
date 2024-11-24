@@ -5,9 +5,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150vh;  /* height as a percentage of the viewport */
+    height: 150vh;  
     margin: 1vw;
     background-color: #767676;
+    place-items: center;
 }
 
 label {
@@ -18,21 +19,24 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60vh;  /* height as a percentage of the viewport */
-    width: 98vw;  /* width as a percentage of the viewport */
-    padding-top: 1vh; /* Adjusted to bring the form box higher (from 25vh to 15vh) */
+    height: 60vh;  
+    width: 100vw;  
+    padding-top: 1vh; 
+    
 }
 
 .formContainer {
     background-color: white;
     opacity: 0.9;
-    padding: 2rem;  /* using rem for more consistent scaling */
-    border-radius: 0.625rem;  /* border radius in rem for consistency */
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* shadow with rem values */
-    width: 30vw;  /* width as a percentage of the viewport */
-    margin: 3vh 2vw;  /* Reduced the vertical margin (from 5vh to 3vh) */
+    padding: 2rem; 
+    border-radius: 0.625rem;  
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
+    width: 30vw;  
+    margin: 3vh 2vw;  
     margin-top: 10vh;
+    left: 50%;
     display: flex;
+    
     flex-direction: column;
     justify-content: center;
 }
@@ -40,16 +44,16 @@ label {
 .formToggle {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2rem;  /* space between form toggle buttons */
+    margin-bottom: 2rem;  
 }
 
 .formToggle button {
     width: 50%;
-    padding: 1rem;  /* padding in rem */
+    padding: 1rem;  
     background-color: #f3f3f3;
     border: none;
     cursor: pointer;
-    font-size: 1rem;  /* font size in rem for scalability */
+    font-size: 1rem;  
     border-radius: 0.625rem 0.625rem 0 0;
 }
 
@@ -64,22 +68,22 @@ label {
 }
 
 .form h2 {
-    margin-bottom: 2rem;  /* margin in rem for consistency */
+    margin-bottom: 2rem;  
     text-align: center;
 }
 
 .form input {
     padding: 1rem;
-    margin-bottom: 0.5rem;  /* margin in rem for consistency */
+    margin-bottom: 0.5rem;  
     border: 1px solid #ddd;
-    border-radius: 0.3125rem;  /* border radius in rem */
+    border-radius: 0.3125rem;  
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form input:focus {
     outline: none;
     border-color: black;
-    box-shadow: 0 0 0.3125rem black; /* subtle glow effect with rem */
+    box-shadow: 0 0 0.3125rem black; 
 }
 
 .form button {
@@ -87,7 +91,7 @@ label {
     background-color: rgba(252, 185, 0, 1);
     color: white;
     border: none;
-    border-radius: 0.3125rem;  /* consistent border radius */
+    border-radius: 0.3125rem;  
     cursor: pointer;
 }
 
@@ -99,9 +103,9 @@ label {
 }
 
 .form p {
-    padding-top: 0.5rem;  /* reduced padding for better alignment */
+    padding-top: 0.5rem;  
     text-align: center;
-    font-size: 0.875rem;  /* smaller font size in rem */
+    font-size: 0.875rem;  
     color: red;
 }
 
@@ -117,14 +121,14 @@ label {
     display: none;
 }
 
-/* Forgot password container */
+
 .forgotPasswordContainer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* full viewport width */
-    height: 100vh; /* full viewport height */
-    background-color: rgba(0, 0, 0, 0.5);  /* dark overlay */
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.5);  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,10 +136,10 @@ label {
 
 .forgotPasswordForm {
     background-color: white;
-    padding: 2rem;  /* padding in rem */
-    border-radius: 0.625rem;  /* border radius in rem */
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* shadow in rem */
-    width: 30vw;  /* width as a percentage of the viewport */
+    padding: 2rem;
+    border-radius: 0.625rem;  
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
+    width: 30vw;  
     text-align: center;
 }
 
@@ -162,26 +166,273 @@ label {
     background-color: #444;
 }
 
-/* Input placeholder styling */
+.otpVerificationContainer {
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 30vw;
+    padding: 2rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.625rem;
+    z-index: 100; /* Make sure it appears above the forgot password modal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.otpVerificationContainer input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.3125rem;
+    border: 1px solid #ddd;
+}
+
+.otpVerificationContainer button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #1C1F26;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+}
+
+.otpVerificationContainer button:hover {
+    background-color: #444;
+}
+
+.successMessage {
+    position: absolute;
+    top: 20%; /* Adjust to fit within the view */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 1rem;
+    margin-top: 1.6rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    width: 31vw;
+    height: 26vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure it's on top of other elements */
+    visibility: visible; /* Make sure it stays visible */
+    opacity: 1; /* Full opacity */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.successMessage a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #1C1F26;
+    border-radius: 0.3125rem;
+}
+
+.successMessage a:hover {
+    background-color: #444;
+}
+
+.tickAnimation {
+    font-size: 4rem; /* Slightly larger size for better visibility */
+    animation: tick 0.5s ease-in-out forwards;
+}
+
+@keyframes tick {
+    0% {
+        transform: scale(0); /* Start smaller */
+        opacity: 0; /* Start invisible */
+    }
+    50% {
+        transform: scale(1.5); /* Enlarge during the middle of animation */
+        opacity: 1; /* Make visible during scaling */
+    }
+    100% {
+        transform: scale(1); /* Final size */
+        opacity: 1; /* Fully visible */
+    }
+}
 .form input::placeholder {
     font-family: 'Montserrat', sans-serif;
     color: #999;
     font-weight: 400;
 }
 
-/* Apply Montserrat font to the entire page */
+
 body {
     font-family: 'Montserrat', sans-serif;
 }
 
 footer {
-    width: 100vw; /* ensure footer spans the full viewport width */
+    width: 100vw; 
     text-align: center;
-    padding: 1rem;  /* padding in rem for consistency */
+    padding: 1rem;  
     background-color: #333;
     color: white;
     position: absolute;
     bottom: 0;
     left: 0;
     font-family: 'Montserrat', sans-serif;
+}
+
+.changePasswordContainer {
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 30vw;
+    padding: 2rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    animation: fadeInScale 0.5s ease-in-out;
+}
+
+/* Change Password Form */
+.changePasswordForm {
+    width: 100%;
+    text-align: center;
+}
+
+.changePasswordForm h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Change Password Input Fields */
+.changePasswordForm input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.3125rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.changePasswordForm input:focus {
+    border-color: rgba(252, 185, 0, 1);
+    box-shadow: 0 0 6px rgba(252, 185, 0, 0.8);
+    outline: none;
+}
+
+/* Error Message */
+.changePasswordForm .error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Success Message */
+.changePasswordForm .success {
+    color: green;
+    font-size: 0.875rem;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Submit Button */
+.changePasswordForm button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #1C1F26;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.changePasswordForm button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.changePasswordForm button:hover:not(:disabled) {
+    background-color: #444;
+    transform: scale(1.03);
+}
+
+/* Success Message */
+.successMessage {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    width: 30vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.successMessage .tickAnimation {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: tick 0.5s ease-in-out forwards;
+}
+
+.successMessage button {
+    background-color: #1C1F26;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.successMessage button:hover {
+    background-color: #444;
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes tick {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

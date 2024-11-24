@@ -9,7 +9,9 @@ export default function SignupAndLogin() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [fullName, setFullName] = useState('');
     const [userName, setuserName] = useState('');
-    
+    const [passwordChanged, setPasswordChanged] = useState(false);
+    const [changePasswordVisible, setChangePasswordVisible] = useState(false);
+
     // Separate error states for login and signup
     const [loginEmailError, setLoginEmailError] = useState('');
     const [loginPasswordError, setLoginPasswordError] = useState('');
@@ -18,38 +20,55 @@ export default function SignupAndLogin() {
     const [signupEmailError, setSignupEmailError] = useState('');
     const [signupPasswordError, setSignupPasswordError] = useState('');
     const [signupFormError, setSignupFormError] = useState('');
-    
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [agreeToTerms, setAgreeToTerms] = useState(false); // State for the checkbox
     const [termsError, setTermsError] = useState(''); // State for the error message
 
     const [isForgotPassword, setIsForgotPassword] = useState(false);  // State for handling forgot password view
     const [otpError, setOtpError] = useState('');
     const [emailForForgotPassword, setEmailForForgotPassword] = useState('');
+    const [otp, setOtp] = useState(''); 
+    const [otpSent, setOtpSent] = useState(false); 
+    const [otpSuccess, setOtpSuccess] = useState(false); 
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
         return email.includes('@');
     };
 
+
+    const handleBackToLogin = () => {
+        setPassword('');
+        setConfirmPassword('');
+        setPasswordChanged(false);
+        setIsForgotPassword(false); // If applicable
+        setOtpSuccess(false); 
+        setChangePasswordVisible(false);
+        setOtpSent(false);
+        // Reset OTP state if needed
+    };
+    
+    
     const handleSignUp = async (e) => {
         e.preventDefault();
         setSignupEmailError('');
         setSignupPasswordError('');
+        setConfirmPasswordError('');
         setSignupFormError('');
 
-        // Validate email format
+        
         if (!validateEmail(email)) {
             setSignupEmailError('Please enter a valid email address');
             return;
         }
 
-        // Check if all fields are filled
+        
         if (!email || !password || !confirmPassword || !userName) {
             setSignupFormError('All fields are required');
             return;
         }
 
-        // Check if passwords match
+        
         if (password !== confirmPassword) {
             setSignupPasswordError('Passwords do not match');
             return;
@@ -79,10 +98,10 @@ export default function SignupAndLogin() {
             throw new Error(errorMessage);
           }
           
-          // If successful, navigate to the home page or another page
+          
           navigate('/');
         } catch (err) {
-        //   setError(err.message);
+        
             console.log(err);
         }
 
@@ -92,11 +111,11 @@ export default function SignupAndLogin() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setLoginEmailError(''); // Clear previous email error
-        setLoginPasswordError(''); // Clear previous password error
+        setLoginEmailError(''); 
+        setLoginPasswordError(''); 
         setLoginFormError('');
 
-        // Validate email format
+        
         if (!validateEmail(email)) {
             setLoginEmailError('Please enter a valid email address');
         } else if (!email || !password) {
@@ -135,43 +154,74 @@ export default function SignupAndLogin() {
         
     };
 
-    const handleForgotPassword = async (e) => {
-        e.preventDefault();
-        setOtpError(''); // Clear previous OTP error
+    // const handleForgotPassword = async (e) => {
+    //     e.preventDefault();
+    //     setOtpError(''); // Clear previous OTP error
 
-        // Validate email format
-        if (!validateEmail(emailForForgotPassword)) {
-            setOtpError('Please enter a valid email address');
-        } else {
+    //     // Validate email format
+    //     if (!validateEmail(emailForForgotPassword)) {
+    //         setOtpError('Please enter a valid email address');
+    //     } else {
 
-            try {
-              const response = await fetch('http://localhost:5124/mail/sendotp', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({email: emailForForgotPassword}),
-                credentials: 'include', // Include cookies in the request
-              });
-              console.log(response)
-              if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(errorMessage);
-              }
+    //         try {
+    //           const response = await fetch('http://localhost:5124/mail/sendotp', {
+    //             method: 'POST',
+    //             headers: {
+    //               'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({email: emailForForgotPassword}),
+    //             credentials: 'include', // Include cookies in the request
+    //           });
+    //           console.log(response)
+    //           if (!response.ok) {
+    //             const errorMessage = await response.text();
+    //             throw new Error(errorMessage);
+    //           }
               
-              // If successful, navigate to the home page or another page
-            //   navigate('/Login');
+    //           // If successful, navigate to the home page or another page
+    //         //   navigate('/Login');
 
-            console.log('OTP sent');
-            // You can add OTP sending logic here (API call, etc.)
-            setIsForgotPassword(false);  // Close the forgot password modal after submission
-
-            } catch (err) {
-            //   setError(err.message);
-                console.log(err);
-            }
+    //         console.log('OTP sent');
+    //         setOtpSent(true); // OTP has been sent
+    //         // You can add OTP sending logic here (API call, etc.)
+    //         setIsForgotPassword(false);  // Close the forgot password modal after submission
+             
+    //         } catch (err) {
+    //         //   setError(err.message);
+    //             console.log(err);
+    //             setOtpError('An error occurred. Please try again.');
+    //         }
 
             
+    //     }
+    // };
+
+    const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setOtpError('');
+
+    if (!validateEmail(emailForForgotPassword)) {
+        setOtpError('Please enter a valid email address');
+    } else {
+        // Simulate the OTP sending process
+        setTimeout(() => {
+            // Simulating successful OTP send by setting otpSent to true
+            setOtpSent(true); // OTP has been sent
+            // Reset the error in case of success
+            setOtpError('');
+            setIsForgotPassword(false);
+        }, 500); // Simulate delay
+    }};
+
+    const handleOtpVerification = async (e) => {
+        e.preventDefault();
+        setOtpError('');
+
+        if (otp === '1234') {  // Simulating OTP validation. Replace with real logic.
+            setOtpSuccess(true);
+            setOtpError('');
+        } else {
+            setOtpError('Invalid OTP or unregistered user');
         }
     };
 
@@ -233,7 +283,7 @@ export default function SignupAndLogin() {
                         className={!isLogin ? styles.active : ""} 
                         onClick={() => {
                             setIsLogin(false);
-                            setSignupEmailError(''); // Reset signup errors when switching to signup
+                            setSignupEmailError(''); 
                             setSignupPasswordError('');
                             setSignupFormError('');
                         }}
@@ -352,6 +402,81 @@ export default function SignupAndLogin() {
                         </div>
                     </div>
                 )}
+                {/* OTP Verification */}
+                {otpSent && !otpSuccess && (
+                    <div className={styles.otpVerificationContainer}>
+                        <h3>Enter OTP</h3>
+                        <input 
+                            type='text' 
+                            placeholder='Enter OTP' 
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)} 
+                            maxLength={4}
+                            required
+                        />
+                        {otpError && <p className={styles.error}>{otpError}</p>}
+                        <button onClick={handleOtpVerification}>Verify OTP</button>
+                    </div>
+                )}
+                {otpSuccess && (
+    <div className={`${styles.successMessage} ${otpSuccess ? styles.show : ''}`}>
+        <div className={styles.tickAnimation}>✔</div>
+        <p>OTP Verified Successfully!</p>
+        <button onClick={() => { 
+    setChangePasswordVisible(true); 
+    setOtpSuccess(false); 
+}}>Change Password</button> {/* Change Password Button */}
+    </div>
+)}
+
+{/* Change Password Form */}
+{changePasswordVisible && (
+    <div className={styles.changePasswordContainer}>
+        <div className={styles.changePasswordForm}>
+            <h3>Change Password</h3>
+            {!passwordChanged ? (
+                <>
+                    <input
+                        type="password"
+                        placeholder="Enter New Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Confirm New Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                    {password !== confirmPassword && password.length > 0 && confirmPassword.length > 0 && (
+                        <p className={styles.error}>Passwords do not match</p>
+                    )}
+                    {password === confirmPassword && password.length > 0 && confirmPassword.length > 0 && (
+                        <p className={styles.success}>Passwords match</p>
+                    )}
+                    <button
+                        onClick={() => {
+                            if (password === confirmPassword) {
+                                setPasswordChanged(true);
+                            }
+                        }}
+                        disabled={password !== confirmPassword || password.length === 0 || confirmPassword.length === 0}
+                    >
+                        Submit
+                    </button>
+                </>
+            ) : (
+                <>
+                    <p className={styles.success}>Password Changed Successfully!</p>
+                    <button onClick={handleBackToLogin}>Back to Login</button>
+                </>
+            )}
+        </div>
+    </div>
+)}
+
             </div>
         </div>
     );
