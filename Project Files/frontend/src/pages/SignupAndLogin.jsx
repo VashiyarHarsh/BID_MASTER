@@ -23,13 +23,15 @@ export default function SignupAndLogin() {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [agreeToTerms, setAgreeToTerms] = useState(false); // State for the checkbox
     const [termsError, setTermsError] = useState(''); // State for the error message
-
+    const [isOtpVerified, setIsOtpVerified] = useState(false);
     const [isForgotPassword, setIsForgotPassword] = useState(false);  // State for handling forgot password view
     const [otpError, setOtpError] = useState('');
     const [emailForForgotPassword, setEmailForForgotPassword] = useState('');
     const [otp, setOtp] = useState(''); 
     const [otpSent, setOtpSent] = useState(false); 
     const [otpSuccess, setOtpSuccess] = useState(false); 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [hh, sethh] = useState(false);
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -154,6 +156,36 @@ export default function SignupAndLogin() {
         
     };
 
+    const handleSendOTP = async (e) => {
+        e.preventDefault();
+        setOtpError(''); // Clear any previous errors
+    
+        if (!validateEmail(emailForForgotPassword)) {
+            setOtpError('Please enter a valid email address');
+            return;
+        }
+    
+        try {
+            const response = await fetch('http://localhost:5124/mail/sendotp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: emailForForgotPassword }),
+            });
+    
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+            }
+    
+            setOtpSent(true); // Indicate OTP has been sent
+            setOtpError('');  // Clear any errors
+            console.log('OTP sent successfully');
+        } catch (err) {
+            console.error(err);
+            setOtpError('Failed to send OTP. Please try again.');
+        }
+    };
+
     // const handleForgotPassword = async (e) => {
     //     e.preventDefault();
     //     setOtpError(''); // Clear previous OTP error
@@ -196,34 +228,119 @@ export default function SignupAndLogin() {
     //     }
     // };
 
-    const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    setOtpError('');
+    // const handleForgotPassword = async (e) => {
+    // e.preventDefault();
+    // setOtpError('');
 
-    if (!validateEmail(emailForForgotPassword)) {
-        setOtpError('Please enter a valid email address');
-    } else {
-        // Simulate the OTP sending process
-        setTimeout(() => {
-            // Simulating successful OTP send by setting otpSent to true
-            setOtpSent(true); // OTP has been sent
-            // Reset the error in case of success
-            setOtpError('');
-            setIsForgotPassword(false);
-        }, 500); // Simulate delay
-    }};
+    // if (!validateEmail(emailForForgotPassword)) {
+    //     setOtpError('Please enter a valid email address');
+    // } else {
+    //     // Simulate the OTP sending process
+    //     setTimeout(() => {
+    //         // Simulating successful OTP send by setting otpSent to true
+    //         setOtpSent(true); // OTP has been sent
+    //         // Reset the error in case of success
+    //         setOtpError('');
+    //         setIsForgotPassword(false);
+    //     }, 500); // Simulate delay
+    // }};
 
-    const handleOtpVerification = async (e) => {
+    const handleVerifyOTP = async (e) => {
         e.preventDefault();
-        setOtpError('');
-
-        if (otp === '1234') {  // Simulating OTP validation. Replace with real logic.
-            setOtpSuccess(true);
-            setOtpError('');
-        } else {
-            setOtpError('Invalid OTP or unregistered user');
+        setOtpError(''); // Clear any previous errors
+    
+        if (!otp || otp.length !== 4) {
+            setOtpError('Please enter a valid 4-digit OTP');
+            return;
+        }
+        
+        try {
+            const response = await fetch('http://localhost:5124/mail/verifyotp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: emailForForgotPassword, otp }),
+            });
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+            }
+            setOtpSuccess(true); // Indicate OTP is verified
+            sethh(true);
+            console.log('OTP verified successfully');
+        } catch (err) {
+            console.error(err);
+            setOtpError('Invalid OTP or expired OTP. Please try again.');
         }
     };
+
+    const handleChangePassword = async (e) => {
+        console.log('Apun zinda hai');
+        e.preventDefault();
+        setOtpError(''); // Clear any previous errors
+        if (hh) {
+            console.log('Apun ko pata hai otp sahi hai');
+            try {
+                console.log('Changing password...');
+                const response = await fetch('http://localhost:5124/mail/resetpassword', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailForForgotPassword, newPassword: password }),
+            });
+            console.log(response.status);
+            // if (!response.ok) {
+            //     const errorMessage = await response.text();
+            //     throw new Error(errorMessage);
+            // }
+            if (response.status === 200) {
+                setPasswordChanged(true);
+                alert('Password changed successfully!');
+                navigate('/');
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.message}`);
+            }
+            //console.log('Password changed successfully');
+            
+            } catch (error) {
+                setErrorMessage(error.response?.data || 'Failed to update password.');
+            }
+        } else {
+            setErrorMessage('Please verify OTP first.');
+        }
+    }
+
+
+    // handleChangePassword = async (e) => {
+    //     e.preventDefault();
+    //     setOtpError(''); // Clear any previous errors
+    //     if (isOtpVerified) {
+    //         try {
+    //             const response = await axios.post('/user/resetpassword', {
+    //                 email,
+    //                 newPassword,
+    //             });
+    //             if (response.status === 200) {
+    //                 setSuccessMessage('Password updated successfully!');
+    //                 setErrorMessage('');
+    //             }
+    //         } catch (error) {
+    //             setErrorMessage(error.response?.data || 'Failed to update password.');
+    //         }
+    //     } else {
+    //         setErrorMessage('Please verify OTP first.');
+    //     }
+    // }
+
+    // const handleOtpVerification = async (e) => {
+    //     e.preventDefault();
+    //     setOtpError('');
+    //     if (otp === '1234') {  // Simulating OTP validation. Replace with real logic.
+    //         setOtpSuccess(true);
+    //         setOtpError('');
+    //     } else {
+    //         setOtpError('Invalid OTP or unregistered user');
+    //     }
+    // };
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
@@ -397,7 +514,7 @@ export default function SignupAndLogin() {
                                 required
                             />
                             {otpError && <p className={styles.error}>{otpError}</p>}
-                            <button onClick={handleForgotPassword}>Send OTP</button>
+                            <button onClick={handleSendOTP}>Send OTP</button>
                             <button onClick={() => setIsForgotPassword(false)}>Cancel</button>
                         </div>
                     </div>
@@ -415,7 +532,7 @@ export default function SignupAndLogin() {
                             required
                         />
                         {otpError && <p className={styles.error}>{otpError}</p>}
-                        <button onClick={handleOtpVerification}>Verify OTP</button>
+                        <button onClick={handleVerifyOTP}>Verify OTP</button>
                     </div>
                 )}
                 {otpSuccess && (
@@ -430,7 +547,7 @@ export default function SignupAndLogin() {
 )}
 
 {/* Change Password Form */}
-{changePasswordVisible && (
+{/* {changePasswordVisible && (
     <div className={styles.changePasswordContainer}>
         <div className={styles.changePasswordForm}>
             <h3>Change Password</h3>
@@ -472,6 +589,46 @@ export default function SignupAndLogin() {
                     <p className={styles.success}>Password Changed Successfully!</p>
                     <button onClick={handleBackToLogin}>Back to Login</button>
                 </>
+            )}
+        </div>
+    </div>
+)} */}
+{/* Change Password Form */}
+{changePasswordVisible && (
+    <div className={styles.changePasswordContainer}>
+        <div className={styles.changePasswordForm}>
+            <h3>Change Password</h3>
+            {!passwordChanged ? (
+                <>
+                    <input
+                        type="password"
+                        placeholder="Enter New Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Confirm New Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                    {password !== confirmPassword && password.length > 0 && confirmPassword.length > 0 && (
+                        <p className={styles.error}>Passwords do not match</p>
+                    )}
+                    {password === confirmPassword && password.length > 0 && confirmPassword.length > 0 && (
+                        <p className={styles.success}>Passwords match</p>
+                    )}
+                    <button 
+                        onClick={handleChangePassword} // Use handleChangePassword here
+                        disabled={password !== confirmPassword || !password}
+                    >
+                        Submit
+                    </button>
+                </>
+            ) : (
+                <p>Password changed successfully!</p>
             )}
         </div>
     </div>
