@@ -15,7 +15,7 @@ const userRouter = require("./router/userRouter");
 const mailRouter = require("./router/mailRouter");
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Specify your frontend URL
+    origin: 'https://bid-master-front.vercel.app', // Specify your frontend URL
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -33,7 +33,10 @@ app.use("/filter", categoryRouter);
 app.use("/user", userRouter);
 app.use("/mail", mailRouter);
 
-app.use(fileUpload())
+app.use(fileUpload());
+app.get("/", (req, res) => {
+    res.send("Hello from the server!");
+  });
 
 const connectDb = async () => {
     try {

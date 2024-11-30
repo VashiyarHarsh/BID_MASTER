@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./addProducts.css";
+import "./AddProducts.css";
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const AddProducts = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5124/api/form/addProducts', {
+      const response = await fetch('https://bid-master-backend.vercel.app/api/form/addProducts', {
         method: "POST",
         body: formData,
         credentials: "include",
