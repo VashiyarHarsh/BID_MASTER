@@ -66,9 +66,10 @@ const restrictTo = (roles) => {
 
 function setCookie(res, name, value, options = {}) {
     const cookieOptions = {
-        // httpOnly: true,
-        // secure: process.env.NODE_ENV === "production",
-        // sameSite: "lax",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none", // Required for cross-origin cookies
+        domain: process.env.COOKIE_DOMAIN || undefined, // Set the domain if needed
         ...options,
     };
     res.cookie(name, value, cookieOptions);
