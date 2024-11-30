@@ -14,13 +14,16 @@ export const Home = () => {
                 <span className="highlight">BidMaster</span>
               </h1>
               <p className="description">
-                BidMaster is a service where participants bid for products or services via the Internet. Explore our platform for secure, convenient bidding.
+              Explore detailed product listings, place bids on your favorite items, and start bidding today! 
+              Welcome to our online auction platform where users can view rare products, bid on, and purchase unique items across 
+              categories such as Collectibles, Art & Antiques, Jewelry & Watches, Furniture & Home Decor, 
+              Books & Manuscripts, Wine & Spirits, and Musical Instruments.
               </p>
              
             </div>
             <div className="image-content" id="img1">
               <img
-                src="/Images/hero section.jpg"
+                src="/src/img/img1_auction.jpg"
                 alt="Auction Illustration"
                 className="image-rounded"
               />
@@ -41,7 +44,7 @@ export const Home = () => {
                 />
                 <h3 className="feature-title highlight1">Security</h3>
                 <p className="feature-description">
-                  Our sellers are thoroughly verified. You can rest assured knowing that your personal and financial details are safe and secure.
+                  Our sellers are thoroughly verified. You can rest assured knowing that your personal details are safe and secure.
                 </p>
               </div>
               <div className="feature-item">
@@ -63,7 +66,7 @@ export const Home = () => {
                 />
                 <h3 className="feature-title highlight1">Flexibility</h3>
                 <p className="feature-description">
-                  Managing your listings and bids has never been easier. Stay updated on your activity and enjoy the smooth user experience.
+                Bidders may place their bid whenever it is most convenient for them.Keep track of your activities and take pleasure in the seamless user experience.
                 </p>
               </div>
             </div>
@@ -76,7 +79,10 @@ export const Home = () => {
             <div className="text-content">
               <h2 className="subtitle highlight">Create a Lot</h2>
               <p className="description">
-                To start selling, simply create a new lot in "ADD PRODUCT" page by entering valid information such as the item name, category, and starting price. The more detailed your lot information, the better chances you have of getting bids. Our intuitive platform will guide you through the entire process, ensuring a seamless experience.
+                To start selling, simply create a new lot in "ADD PRODUCT" page by entering valid information such as the item name, category, and starting price.... The more detailed your lot information, the better chances you have of getting bids. Our intuitive platform will guide you through the entire process, ensuring a seamless experience.
+                
+                {/* <p>To start selling, simply head to the "ADD PRODUCT" page and create a new lot by entering all the necessary details, such as the item name, category, starting price, and a clear description of the product. The more information you provide, such as high-quality images, item condition, and specific features, the better your chances of attracting potential buyers. A well-detailed listing helps buyers make informed decisions, increasing the likelihood of receiving bids.
+Our user-friendly platform is designed to guide you step-by-step through the entire listing process, ensuring that you don't miss any key details. From setting up your auction to tracking bids in real-time, we make it easy for you to manage your items and maximize your success in the countdown auction.</p> */}
               </p>
               
             </div>
@@ -103,7 +109,7 @@ export const Home = () => {
             <div className="text-content">
               <h2 className="subtitle highlight">Make a bid</h2>
               <p className="description">
-                Customers will see the product details, and if interested in a product, they can place a bid. A valid identity proof is required to complete the bidding process.
+              On our platform, customers can easily browse a wide range of products with detailed descriptions, specifications, and images, helping you make informed decisions. If a product catches your interest, you can place a bid, setting your own price and competing with other buyers. The more competitive your bid, the higher your chances of winning.
               </p>
             </div>
           </div>

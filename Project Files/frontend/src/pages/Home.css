@@ -1,24 +1,29 @@
-/* General */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 .app {
-  font-family: Montserrat, sans-serif;
-  background-color: #F4F1E3;
+  font-family: 'Montserrat', serif; /* Updated font */
+  background-color: #f5e7cb; /* Soft background similar to #c8b158 tone */
   margin: 0;
   padding: 0;
   padding-top: 10vh;
 }
-body {
+
+/* body {
   width: 100%;
-}
-.container {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* max-width: 1024px; */
-  margin: 0 auto;
+} */
+
+/* .container {
+  font-family: 'Montserrat', serif; /* Updated font */
+  /* margin: 0 auto;
   padding: 2vw;
   box-sizing: border-box;
-}
+  background-color: white; 
+  border: 1px solid #b8b1a0; 
+  border-radius: 0.5rem;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.563);  */
+/* }  */
 
+/* Flexbox utility classes */
 .flex-row {
   display: flex;
   flex-direction: column;
@@ -38,17 +43,24 @@ body {
 
 .text-center h2 {
   margin: 3vh;
-}
-p {
-  font-size: 1.25em;
-}
-/* Hero Section */
-.hero-section {
-  background-color: #d1cec6;
-  padding: 6vw 0;
-  padding-top: 70vw;
+  color: #413e35; /* Dark brown for headings */
 }
 
+p {
+  font-size: 1.25em;
+  color: rgb(78, 75, 75); /* Neutral text color */
+}
+
+/* Hero Section */
+.hero-section {
+  background-color: #d6c387; /* Gold-inspired tone */
+  padding: 2vw 0;
+  padding-top: 60vw;
+}
+.bid{
+  color: #161102;
+  font-weight: bolder;
+}
 .title {
   font-size: 2.5vw;
   font-weight: bold;
@@ -56,19 +68,23 @@ p {
   margin-bottom: 2vw;
   margin-left: 5vw;
   line-height: 1.5;
-  color: black;
+  color: #413e35; /* Consistent dark brown */
 }
 
 .highlight {
-  color: rgb(174, 137, 36);
+  color: #6b6a64; 
+  /* font-size: larger; */
+  /* padding-top: 0%; */
+  
 }
-.highlight1{
+
+.highlight1 {
   color: black;
 }
 
 .description {
-  font-style:Montserrat, sans-serif;
-  color: rgb(78, 75, 75);
+  font-family: 'Montserrat', serif;
+  color: #413e35; /* Dark text for readability */
   margin-bottom: 2vw;
   font-size: 1.25vw;
   margin-left: 5vw;
@@ -84,21 +100,24 @@ p {
 #img2 {
   width: 75vw;
 }
+
 #img3 {
   width: 50vw;
   margin: 8vw;
 }
 
-
 .image-rounded {
-  border-radius: 5vw;
-  max-width: 100%;
-  height: auto;
+  border-radius: 1vw;
+  /* max-width: 100%; */
+  height: 30vh;
+  width: 50vh;
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 /* Features Section */
 .features-section {
   padding: 6vw 0;
+  background-color: #e9d9b7; /* Light beige for section */
 }
 
 .features-grid {
@@ -115,7 +134,11 @@ p {
 
 .feature-item {
   text-align: center;
-
+  background-color: white;
+  padding: 2rem;
+  border: 1px solid #b8b1a0;
+  border-radius: 0.5rem;
+  box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .icon {
@@ -129,30 +152,33 @@ p {
   font-size: 1.5vw;
   font-weight: bold;
   margin-bottom: 1.5vw;
+  color: #413e35; /* Consistent heading color */
 }
 
 .feature-description {
-  color: #6b7280;
+  color: rgb(78, 75, 75); /* Neutral text */
   font-size: 1.25vw;
 }
 
 /* Profile Section */
 .profile-section,
 .bid-section {
-  background-color: #E2DBC1;
+  background-color: #f5e7cb; /* Soft beige tone */
   padding: 6vw 0;
+  border-top: 1px solid #b8b1a0; /* Section separation */
 }
 
 .btn-primary {
   padding: 3vw 6vw;
-  background-color: #2563eb;
+  background-color: #413e35; /* Dark brown button */
   color: #fff;
   border: none;
-  border-radius: 5vw;
+  border-radius: 0.25rem;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #1e3a8a;
+  background-color: #d6c48e; /* Hover color consistent with buttons */
 }
