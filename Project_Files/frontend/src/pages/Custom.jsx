@@ -94,7 +94,7 @@ useEffect(() => {
 
   const handleRemoveProduct = async (productId) => {
     try {
-      const response = await fetch(`https://bid-master-back.vercel.app/api/form/remove/${productId}`, {
+      const response = await fetch(`https://bid-master-backend.vercel.app/api/form/remove/${productId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

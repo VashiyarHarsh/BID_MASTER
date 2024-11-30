@@ -68,7 +68,7 @@ const AddProducts = () => {
     }
 
     try {
-      const response = await fetch('https://bid-master-back.vercel.app/api/form/addProducts', {
+      const response = await fetch('https://bid-master-backend.vercel.app/api/form/addProducts', {
         method: "POST",
         body: formData,
         credentials: "include",

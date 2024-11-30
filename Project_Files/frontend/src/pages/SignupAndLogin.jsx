@@ -86,7 +86,7 @@ export default function SignupAndLogin() {
 
 
         try {
-          const response = await fetch('https://bid-master-back.vercel.app/user/signup', {
+          const response = await fetch('https://bid-master-backend.vercel.app/user/signup', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ export default function SignupAndLogin() {
 
             try {
               
-              const response = await fetch('https://bid-master-back.vercel.app/user/signin', {
+              const response = await fetch('https://bid-master-backend.vercel.app/user/signin', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ export default function SignupAndLogin() {
         }
     
         try {
-            const response = await fetch('https://bid-master-back.vercel.app/mail/sendotp', {
+            const response = await fetch('https://bid-master-backend.vercel.app/mail/sendotp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailForForgotPassword }),
@@ -255,7 +255,7 @@ export default function SignupAndLogin() {
         }
         
         try {
-            const response = await fetch('https://bid-master-back.vercel.app/mail/verifyotp', {
+            const response = await fetch('https://bid-master-backend.vercel.app/mail/verifyotp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailForForgotPassword, otp }),
@@ -281,7 +281,7 @@ export default function SignupAndLogin() {
             console.log('Apun ko pata hai otp sahi hai');
             try {
                 console.log('Changing password...');
-                const response = await fetch('https://bid-master-back.vercel.app/mail/resetpassword', {
+                const response = await fetch('https://bid-master-backend.vercel.app/mail/resetpassword', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: emailForForgotPassword, newPassword: password }),
