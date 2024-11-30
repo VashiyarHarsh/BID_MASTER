@@ -33,7 +33,10 @@ app.use("/filter", categoryRouter);
 app.use("/user", userRouter);
 app.use("/mail", mailRouter);
 
-app.use(fileUpload())
+app.use(fileUpload());
+app.get("/", (req, res) => {
+    res.send("Hello from the server!");
+  });
 
 const connectDb = async () => {
     try {
