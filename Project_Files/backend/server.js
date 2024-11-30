@@ -15,7 +15,7 @@ const userRouter = require("./router/userRouter");
 const mailRouter = require("./router/mailRouter");
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Specify your frontend URL
+    origin: 'https://bid-master-nine.vercel.app', // Specify your frontend URL
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

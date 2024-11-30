@@ -49,7 +49,7 @@ useEffect(() => {
       try {
         //const url = isAdmin ? 'http://localhost:5124/api/form/unverified' : 'http://localhost:5124/api/form/';
         //const response = await fetch(url);
-        const response = await fetch('http://localhost:5124/api/form/unverified', {
+        const response = await fetch('https://bid-master-back.vercel.app/api/form/unverified', {
             method: 'GET',
             //body: JSON.stringify(formData),
             headers: {
@@ -75,7 +75,7 @@ useEffect(() => {
 
   const handleVerifyProduct = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:5124/api/form/verify/${productId}`, {
+      const response = await fetch(`https://bid-master-back.vercel.app/api/form/verify/${productId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ useEffect(() => {
 
   const handleRemoveProduct = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:5124/api/form/remove/${productId}`, {
+      const response = await fetch(`https://bid-master-back.vercel.app/api/form/remove/${productId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
