@@ -85,7 +85,7 @@ const AddProducts = () => {
           'Authorization': `Bearer ${token}`,
         },
         body: formData,
-        //credentials: "include",
+        credentials: "include",
       });
       const data = await response.json();
 

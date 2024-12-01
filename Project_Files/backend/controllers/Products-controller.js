@@ -6,6 +6,8 @@ const { uploadOnCloudinary } = require("../utils/cloudinary");
 // const { get } = require("http");
 
 const addProduct = async (req, res) => {
+  console.log("I am in the add product controller");
+  copnsole.log("Files received:", req.files);
   try {
     console.log("Files received:", req.files); // Debugging line
     
