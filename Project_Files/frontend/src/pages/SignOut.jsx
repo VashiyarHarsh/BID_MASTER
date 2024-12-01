@@ -6,7 +6,7 @@ const SignOut = () => {
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        Cookies.remove('token');
+        localStorage.removeItem("token");
         alert("Signed out successfully!");
         navigate('/signin'); // Redirect to sign-in page after sign out
     };
