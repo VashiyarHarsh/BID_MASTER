@@ -70,8 +70,12 @@ const AddProducts = () => {
     try {
       const response = await fetch('https://bid-master-backend.vercel.app/api/form/addProducts', {
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
         body: formData,
-        credentials: "include",
+        //credentials: "include",
       });
       const data = await response.json();
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { checkForAuthenticationCookie, restrictTo } = require("../utils/authentication");
+const { checkForAuthorizationHeader, restrictTo } = require("../utils/authentication");
 const { addProduct, getProductsBySearch, getLatestCreatedProducts, getOldestCreatedProducts, getProductsByReservePriceRange, verifyProduct, removeProduct, getUnverifiedProducts } = require("../controllers/Products-controller");
 const { upload } = require("../middlewares/storeFiles.middleware");
 
@@ -15,7 +15,7 @@ router.get("/unverified", getUnverifiedProducts);
 router.patch("/verify/:productId", verifyProduct);
 router.delete("/remove/:productId", removeProduct);
 
-router.post("/addProducts", checkForAuthenticationCookie("token"), upload.fields([
+router.post("/addProducts", checkForAuthorizationHeader, upload.fields([
     {
         name:"certifications",
         maxCount:3

@@ -131,17 +131,22 @@ export default function SignupAndLogin() {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  //'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include', // Include cookies in the request
+                //credentials: 'include', // Include cookies in the request
                 
               });
-              console.log(response)
+              console.log(response);
               if (!response.ok) {
                 const errorMessage = await response.text();
-                throw new Error(errorMessage);
+                throw new Error(errorMessage || 'Login failed');
               }
-              
+              const data = await response.json();
+              const token = data.token;
+        
+              // Set the token in localStorage
+              localStorage.setItem("token", token);
               // If successful, navigate to the home page or another page
 
               console.log('Login Form Submitted');
