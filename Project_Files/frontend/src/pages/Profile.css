@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #767676; /* Light beige page background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .profile-page {
+    width: 80%;
+    max-width: 1000px;
+    background-color: #ffffff; /* white for the main page container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 80vh; /* Set the height to 80% of the viewport height */
+    display: flex;
+    flex-direction: column; /* To ensure proper layout alignment */
+    justify-content: space-between; /* Space out child elements */
+  }
+  
+  .header {
+    text-align: center;
+    border-bottom: 2px solid #cc9b4c; /* Golden yellow underline */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    color: #212121; /* dark grey */
+    font-size: 55px; /* Increased font size */
+  }
+  
+  .header p {
+    color: #212121; /* dark gray */
+    font-size: 26px;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-grow: 1; /* Allow the card container to expand within the parent */
+    
+  }
+  
+  .card {
+    background-color: #212121; /* DARK GRAY  for cards */
+    border: 3px solid #4a3f35; /* Dark brown border for contrast */
+    border-radius: 10px;
+    padding: 15px;
+    width: 48%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    height: 40vh;
+  }
+  
+  .card h2 {
+    text-align: center;
+    color: #ECDFCC; /* beige */
+    margin-bottom: 15px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 2px solid #cc9b4c; /* Golden yellow divider */
+  }
+  
+  .row:last-child {
+    border-bottom: none;
+  }
+  
+  .row span {
+    color: #ECDFCC; /* Muted brown text */
+    font-size: 14px;
+  }
+  
+  .row span strong {
+    color: #ECDFCC; /* Dark brown */
+  }
+  
