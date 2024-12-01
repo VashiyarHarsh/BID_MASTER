@@ -37,9 +37,9 @@ app.use(fileUpload());
 app.get("/", (req, res) => {
     res.send("Welcome to Bid Master API");
 });
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 const connectDb = async () => {
     try {
         await mongoose.connect(URI);
