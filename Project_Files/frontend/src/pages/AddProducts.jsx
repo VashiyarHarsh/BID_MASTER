@@ -66,7 +66,11 @@ const AddProducts = () => {
     if (product.certifications) {
       product.certifications.forEach((file) => formData.append('certifications', file));
     }
-
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Token is missing! Please log in again.");
+      return;
+    }
     try {
       const response = await fetch('https://bid-master-backend.vercel.app/api/form/addProducts', {
         method: "POST",
