@@ -20,6 +20,8 @@ const ProtectedRoute = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
     if (!token) {
       setRedirecting(true);
 
@@ -32,13 +34,14 @@ const ProtectedRoute = () => {
 
     try {
       const decodedToken = jwtDecode(token);
-      // Add any token expiration check here if needed
+      // You can add additional checks for token expiration or other validation here.
       setIsAuthenticated(true);
     } catch (error) {
       setIsAuthenticated(false); // Token is invalid or expired
       navigate("/Login", { replace: true });
     }
-  }, [token, navigate]);
+  }, [navigate]);
+
 
   if (isAuthenticated === null || redirecting) {
     return (
