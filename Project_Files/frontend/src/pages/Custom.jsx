@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode';
 
-const Products = () => {
+const Custom = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -206,4 +206,4 @@ const styles = {
   },
 };
 
-export default Products;
+export default Custom;

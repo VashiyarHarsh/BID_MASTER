@@ -35,9 +35,8 @@ app.use("/mail", mailRouter);
 
 app.use(fileUpload());
 app.get("/", (req, res) => {
-    res.send("Hello from the server!");
-  });
-
+    res.send("Welcome to Bid Master API");
+});
 const connectDb = async () => {
     try {
         await mongoose.connect(URI);

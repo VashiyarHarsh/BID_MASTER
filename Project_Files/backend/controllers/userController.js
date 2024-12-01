@@ -29,8 +29,8 @@ const handleUserSignIn = async (req, res) => {
     const { email, password } = req.body;
     try {
         const token = await User.matchPasswordAndGenerateToken(email, password);
-        setCookie(res, 'token', token, { maxAge: 24 * 60 * 60 * 1000 });
-        return res.status(200).send("done che");
+        //setCookie(res, 'token', token, { maxAge: 24 * 60 * 60 * 1000 });
+        return res.status(200).json({ token });
     } catch (error) {
         return res.status(401).send("Invalid email or password");
     }

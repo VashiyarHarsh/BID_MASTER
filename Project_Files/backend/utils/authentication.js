@@ -16,25 +16,39 @@ function validateToken(token) {
     return payload;
 }
 
-function checkForAuthenticationCookie(cookieName) {
-    return (req, res, next) => {
-      const tokenCookieValue = req.cookies[cookieName];
-      if (!tokenCookieValue) {
-        return res.status(401).json({ error: "Authentication required" });
-      }
+// function checkForAuthenticationCookie(cookieName) {
+//     return (req, res, next) => {
+//       const tokenCookieValue = req.cookies[cookieName];
+//       if (!tokenCookieValue) {
+//         return res.status(401).json({ error: "Authentication required" });
+//       }
   
-      try {
-        const userPayload = validateToken(tokenCookieValue); // Token validation logic
+//       try {
+//         const userPayload = validateToken(tokenCookieValue); // Token validation logic
+//         req.user = userPayload;
+//         res.locals.user = userPayload;
+//         next();
+//       } catch (error) {
+//         console.error("Invalid token:", error);
+//         return res.status(401).json({ error: "Invalid or expired token" });
+//       }
+//     };
+//   }
+const checkForAuthorizationHeader = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).send("Unauthorized: Token missing or invalid");
+    }
+    const token = authHeader.split(' ')[1]; // Extract the token
+    try {
+        const userPayload = validateToken(token); // Token validation logic
         req.user = userPayload;
         res.locals.user = userPayload;
         next();
-      } catch (error) {
-        console.error("Invalid token:", error);
-        return res.status(401).json({ error: "Invalid or expired token" });
-      }
-    };
-  }
-
+    } catch (err) {
+        return res.status(403).send("Forbidden: Invalid token");
+    }
+};
 // function checkForAuthenticationCookie(cookieName) {
 //     return (req, res, next) => {
 //         const tokenCookieValue = req.cookies[cookieName];
@@ -81,7 +95,7 @@ function clearCookie(res, name) {
 }
 
 module.exports = {
-    checkForAuthenticationCookie,
+    checkForAuthorizationHeader,
     createTokenForUser,
     validateToken,
     restrictTo,
