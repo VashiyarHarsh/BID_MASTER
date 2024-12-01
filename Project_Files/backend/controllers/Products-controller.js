@@ -7,7 +7,7 @@ const { uploadOnCloudinary } = require("../utils/cloudinary");
 
 const addProduct = async (req, res) => {
   try {
-    // console.log("Files received:", req.files); // Debugging line
+    console.log("Files received:", req.files); // Debugging line
     
     const imageFiles = req.files;
   
@@ -55,7 +55,7 @@ const addProduct = async (req, res) => {
     const category = await Category.findOne({ name: req.body.category });
    
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
-   //console.log(subcategory);
+   console.log(subcategory);
     subcategory.items.push(newProduct._id);
     await category.save();
     // Respond with success
