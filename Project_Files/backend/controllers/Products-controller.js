@@ -6,10 +6,8 @@ const { uploadOnCloudinary } = require("../utils/cloudinary");
 // const { get } = require("http");
 
 const addProduct = async (req, res) => {
-  console.log("I am in the add product controller");
-  copnsole.log("Files received:", req.files);
   try {
-    console.log("Files received:", req.files); // Debugging line
+    // console.log("Files received:", req.files); // Debugging line
     
     const imageFiles = req.files;
   
@@ -45,12 +43,11 @@ const addProduct = async (req, res) => {
       ...req.body,
       productImagesURL: imageUrls.filter((url) => url !== null),
       certifications: certificationsUrls.filter((url) => url !== null),
-      //seller: req.user.id
+      seller: req.user.id
     };
 
     // Create the new product
     const newProduct = await Product.create(productData);
-    console.log("New product created:", newProduct); // Debugging line
     const user = await User.findById(req.user.id);
     user.unsoldItems.push(newProduct._id);
     await user.save();
@@ -58,7 +55,7 @@ const addProduct = async (req, res) => {
     const category = await Category.findOne({ name: req.body.category });
    
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
-   console.log(subcategory);
+   //console.log(subcategory);
     subcategory.items.push(newProduct._id);
     await category.save();
     // Respond with success

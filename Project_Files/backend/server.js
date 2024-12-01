@@ -25,8 +25,7 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.urlencoded({ extended:false, limit: '50mb' }));
-// app.use(express.json({  limit: '50mb' }));
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 //app.use("/", router);
 app.use("/api/form", productRoute);
@@ -34,11 +33,10 @@ app.use("/filter", categoryRouter);
 app.use("/user", userRouter);
 app.use("/mail", mailRouter);
 
-app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
+app.use(fileUpload());
 app.get("/", (req, res) => {
-    res.send("Hello from the server!");
-  });
-
+    res.send("Welcome to Bid Master API");
+});
 const connectDb = async () => {
     try {
         await mongoose.connect(URI);

@@ -69,19 +69,18 @@ const AddProducts = () => {
     formData.forEach((value, key) => {
       console.log(key, value);
     });
-  
-    const token = localStorage.getItem("token");
+
+      const token = localStorage.getItem("token");
     console.log(token);
     if (!token) {
       alert("Token is missing! Please log in again.");
       return;
     }
     try {
-      console.log("formdata", formData);
       const response = await fetch('https://bid-master-backend.vercel.app/api/form/addProducts', {
         method: "POST",
         headers: {
-          'Content-Type': 'multipart/form-data',
+          //'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
         body: formData,

@@ -173,7 +173,9 @@ export default function SignupAndLogin() {
         try {
             const response = await fetch('https://bid-master-backend.vercel.app/mail/sendotp', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
                 body: JSON.stringify({ email: emailForForgotPassword }),
             });
     

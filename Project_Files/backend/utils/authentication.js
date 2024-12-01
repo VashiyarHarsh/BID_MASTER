@@ -40,7 +40,6 @@ const checkForAuthorizationHeader = (req, res, next) => {
         return res.status(401).send("Unauthorized: Token missing or invalid");
     }
     const token = authHeader.split(' ')[1]; // Extract the token
-    console.log(token);
     try {
         const userPayload = validateToken(token); // Token validation logic
         req.user = userPayload;
