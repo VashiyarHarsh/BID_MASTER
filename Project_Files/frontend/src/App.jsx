@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SignOut from "./pages/SignOut"
 import Custom from "./pages/Custom"
 import TermsAndConditions from "./pages/TermsAndConditions";
+import Dummy from "./pages/Dummy";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/AddProducts" element={<AddProducts />} />
         <Route path="/profile" element={<UserProfile/>}/>
         <Route path="/BidLive" element={<LiveAuctionPage productImage="https://via.placeholder.com/300" initialPrice={4000} />} />
+        <Route path="/Dummy" element={<Dummy />} />
         </Route>
       </Routes>
       <Footer />
