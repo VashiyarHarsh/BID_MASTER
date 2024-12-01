@@ -91,7 +91,7 @@ export default function SignupAndLogin() {
 
 
         try {
-          const response = await fetch('https://bid-master-backend.vercel.app/user/signup', {
+          const response = await fetch('https://bid-master-backend.vercel.app/api/user/signup', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function SignupAndLogin() {
 
             try {
               
-              const response = await fetch('https://bid-master-backend.vercel.app/user/signin', {
+              const response = await fetch('https://bid-master-backend.vercel.app/api/user/signin', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ export default function SignupAndLogin() {
         }
     
         try {
-            const response = await fetch('https://bid-master-backend.vercel.app/mail/sendotp', {
+            const response = await fetch('https://bid-master-backend.vercel.app/api/mail/sendotp', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json' 
@@ -267,7 +267,7 @@ export default function SignupAndLogin() {
         }
         
         try {
-            const response = await fetch('https://bid-master-backend.vercel.app/mail/verifyotp', {
+            const response = await fetch('https://bid-master-backend.vercel.app/api/mail/verifyotp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: emailForForgotPassword, otp }),
@@ -293,7 +293,7 @@ export default function SignupAndLogin() {
             console.log('Apun ko pata hai otp sahi hai');
             try {
                 console.log('Changing password...');
-                const response = await fetch('https://bid-master-backend.vercel.app/mail/resetpassword', {
+                const response = await fetch('https://bid-master-backend.vercel.app/api/mail/resetpassword', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: emailForForgotPassword, newPassword: password }),
