@@ -34,9 +34,10 @@ app.use("/user", userRouter);
 app.use("/mail", mailRouter);
 
 app.use(fileUpload());
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+app.get("/", (req, res) => {
+    res.send("Hello from the server!");
   });
+
 const connectDb = async () => {
     try {
         await mongoose.connect(URI);
