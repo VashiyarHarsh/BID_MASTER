@@ -45,14 +45,15 @@ const addProduct = async (req, res) => {
       ...req.body,
       productImagesURL: imageUrls.filter((url) => url !== null),
       certifications: certificationsUrls.filter((url) => url !== null),
-      seller: req.user.id
+      //seller: req.user.id
     };
 
     // Create the new product
     const newProduct = await Product.create(productData);
-    const user = await User.findById(req.user.id);
-    user.unsoldItems.push(newProduct._id);
-    await user.save();
+    console.log("New product created:", newProduct); // Debugging line
+    // const user = await User.findById(req.user.id);
+    // user.unsoldItems.push(newProduct._id);
+    // await user.save();
     
     const category = await Category.findOne({ name: req.body.category });
    
