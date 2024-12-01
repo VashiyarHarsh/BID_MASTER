@@ -66,6 +66,10 @@ const AddProducts = () => {
     if (product.certifications) {
       product.certifications.forEach((file) => formData.append('certifications', file));
     }
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+  
     const token = localStorage.getItem("token");
     console.log(token);
     if (!token) {
