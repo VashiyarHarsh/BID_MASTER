@@ -69,7 +69,12 @@ export default function SignupAndLogin() {
             setSignupFormError('All fields are required');
             return;
         }
-
+        
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,16}$/;
+    if (!passwordRegex.test(password)) {
+        setSignupPasswordError('Password must be 8-16 characters with atleast one uppercase letter, number and special character.');
+        return;
+    }
         
         if (password !== confirmPassword) {
             setSignupPasswordError('Passwords do not match');
@@ -369,7 +374,12 @@ export default function SignupAndLogin() {
     const handlePasswordChange = (e) => {
         const value = e.target.value;
         setPassword(value);
-
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,16}$/;
+        if (!passwordRegex.test(value)) {
+            setSignupPasswordError('Password must be 8-16 characters with atleast one uppercase letter, number and special character.');
+        } else {
+            setSignupPasswordError('');
+        }
         if (confirmPassword && value !== confirmPassword) {
             setSignupPasswordError('Passwords do not match');
         } else {
