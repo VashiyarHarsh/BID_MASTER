@@ -8,7 +8,7 @@ const SignOut = () => {
     const handleSignOut = () => {
         localStorage.removeItem("token");
         alert("Signed out successfully!");
-        navigate('/signin'); // Redirect to sign-in page after sign out
+        navigate('/'); // Redirect to sign-in page after sign out
     };
 
     return (
