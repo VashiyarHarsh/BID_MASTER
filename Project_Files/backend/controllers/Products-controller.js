@@ -51,9 +51,9 @@ const addProduct = async (req, res) => {
     // Create the new product
     const newProduct = await Product.create(productData);
     console.log("New product created:", newProduct); // Debugging line
-    // const user = await User.findById(req.user.id);
-    // user.unsoldItems.push(newProduct._id);
-    // await user.save();
+    const user = await User.findById(req.user.id);
+    user.unsoldItems.push(newProduct._id);
+    await user.save();
     
     const category = await Category.findOne({ name: req.body.category });
    

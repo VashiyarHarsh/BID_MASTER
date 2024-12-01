@@ -10,7 +10,7 @@ if (!fs.existsSync(tempDir)) {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, tempDir);
+    cb(null, path.join(__dirname, "../public/temp"));
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
@@ -19,15 +19,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-    fileFilter: (req, file, cb) => {
-      const allowedMimeTypes = ["image/jpeg", "image/png", "application/pdf"];
-      if (allowedMimeTypes.includes(file.mimetype)) {
-        cb(null, true);
-      } else {
-        cb(new Error("Invalid file type. Only JPEG, PNG, and PDF files are allowed."), false);
-      }
-    },
+    // limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+    // fileFilter: (req, file, cb) => {
+    //   const allowedMimeTypes = ["image/jpeg", "image/png", "application/pdf"];
+    //   if (allowedMimeTypes.includes(file.mimetype)) {
+    //     cb(null, true);
+    //   } else {
+    //     cb(new Error("Invalid file type. Only JPEG, PNG, and PDF files are allowed."), false);
+    //   }
+    // },
   });
 
 module.exports = { upload };
