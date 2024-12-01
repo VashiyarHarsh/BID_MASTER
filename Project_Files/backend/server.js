@@ -29,9 +29,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 //app.use("/", router);
 app.use("/api/form", productRoute);
-app.use("/filter", categoryRouter);
-app.use("/user", userRouter);
-app.use("/mail", mailRouter);
+app.use("/api/filter", categoryRouter);
+app.use("/api/user", userRouter);
+app.use("/api/mail", mailRouter);
 
 app.use(fileUpload());
 app.get("/", (req, res) => {
