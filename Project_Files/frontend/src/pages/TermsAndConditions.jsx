@@ -1,12 +1,14 @@
 import React from 'react';
-import './TermsAndConditions.module.css'; 
+
 const TermsAndConditions = () => {
   return (
-    <div className="terms-container">
-      <h1>Terms and Conditions</h1>
-      <p>Welcome to our Online Auction Platform. Please read the following terms and conditions carefully before using our services. By accessing or using the platform, you agree to abide by these terms.</p>
+    <div className="terms-container" style={{ marginTop: '515px',backgroundColor:'white' }}>
 
-      <h2>1. Introduction</h2>
+      <h1 style={{ textAlign: 'center' }}>Terms and Conditions</h1>
+
+      <p style={{marginTop:'20px'}}>Welcome to our Online Auction Platform. Please read the following terms and conditions carefully before using our services. By accessing or using the platform, you agree to abide by these terms.</p>
+
+      <h2 style={{marginTop:'20px'}}>1. Introduction</h2>
       <p>This online auction website is provided to facilitate auctions between buyers and sellers. The platform itself does not own or sell any items listed.</p>
 
       <h2>2. Eligibility</h2>
@@ -44,8 +46,8 @@ const TermsAndConditions = () => {
       <h2>11. Contact Us</h2>
       <p>If you have any questions or concerns, please contact us at <a href="mailto:support@yourauctionplatform.com">support@yourauctionplatform.com</a>.</p>
 
-      <p>Thank you for using our platform!</p>
-    </div>
+      <h2 style={{ textAlign: 'center', marginTop:'0 px' }}>Thank you for using our platform!</h2>
+       </div>
   );
 };
 
