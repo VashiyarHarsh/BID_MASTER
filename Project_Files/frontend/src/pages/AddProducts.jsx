@@ -109,6 +109,45 @@ const AddProducts = () => {
           className="form-input"
         />
       </div>
+      <div>
+        <label className="form-label">Category</label>
+        <select
+          name="category"
+          id="category"
+          className="form-input"
+          value={product.category}
+          onChange={handleInput}
+          required
+        >
+          <option value="">Select Category</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {product.category && (
+        <div>
+          <label className="form-label">Sub Category</label>
+          <select
+            name="subCategory"
+            id="subCategory"
+            className="form-input"
+            value={product.subCategory}
+            onChange={handleInput}
+            required
+          >
+            <option value="">Select Sub Category</option>
+            {subCategories[product.category]?.map((sub) => (
+              <option key={sub} value={sub}>
+                {sub}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div>
         <label htmlFor="productDescription" className="form-label">Product Description</label>
@@ -124,7 +163,7 @@ const AddProducts = () => {
       </div>
 
       <div>
-        <label className="form-label">Reserve Price</label>
+        <label className="form-label">Reserve Price(in rupees)</label>
         <input type="number" name="reservePrice" id="reservePrice"
           autoComplete="off"
           value={product.reservePrice}
@@ -136,7 +175,7 @@ const AddProducts = () => {
       </div>
 
       <div>
-        <label className="form-label">Dimensions</label>
+        <label className="form-label">Dimensions(l x b x h)</label>
         <input type="text" name="dimensions" id="dimensions"
           autoComplete="off"
           value={product.dimensions}
@@ -147,7 +186,7 @@ const AddProducts = () => {
       </div>
 
       <div>
-        <label className="form-label">Weight</label>
+        <label className="form-label">Weight(in grams)</label>
         <input type="number" name="weight" id="weight"
           autoComplete="off"
           value={product.weight}
@@ -192,6 +231,7 @@ const AddProducts = () => {
           required
           multiple
         />
+         <small style={{color: "#6b6b6b" }}>Upload a jpeg,png,jpg document.</small>
       </div>
 
       <div>
@@ -208,45 +248,7 @@ const AddProducts = () => {
         <small style={{color: "#6b6b6b" }}>Upload a PDF document.</small>
       </div>
 
-      <div>
-        <label className="form-label">Category</label>
-        <select
-          name="category"
-          id="category"
-          className="form-input"
-          value={product.category}
-          onChange={handleInput}
-          required
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {product.category && (
-        <div>
-          <label className="form-label">Sub Category</label>
-          <select
-            name="subCategory"
-            id="subCategory"
-            className="form-input"
-            value={product.subCategory}
-            onChange={handleInput}
-            required
-          >
-            <option value="">Select Sub Category</option>
-            {subCategories[product.category]?.map((sub) => (
-              <option key={sub} value={sub}>
-                {sub}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+     
 
       <button type="submit" className="submit-button">
         Add Product

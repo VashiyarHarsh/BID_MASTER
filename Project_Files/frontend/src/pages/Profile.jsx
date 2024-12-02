@@ -6,8 +6,8 @@ return(
   <div className="profile-page">
     <div className="header">
       <h1>PROFILE </h1>
-      <p><strong>Username:</strong> RohinSolanki</p>
-      <p><strong>Email:</strong> Rohinsolanki@gmail.com</p>
+      <p><strong>Username:</strong>ABC</p>
+      <p><strong>Email:</strong>abc@gmail.com</p>
     </div>
     <div className="cards-container">
       {/* Seller Card */}
