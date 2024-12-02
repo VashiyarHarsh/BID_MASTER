@@ -1,21 +1,19 @@
-/* General Footer Styles */
 .footer {
   background-color: #1C1F26;
   color: white;
-  padding: 2rem 0; /* Vertical padding in rem */
-  position: static; /* Footer is not fixed */
-  width: 100%; /* Occupies the full width of the page */
-  text-align: center; /* Center-align all text */
+  padding: 2rem 0; 
+  position: static;
+  width: 100%;
+  text-align: center; 
   font-family: "Montserrat", sans-serif;
-  transition: transform 0.3s ease-in-out; /* Smooth transition for sliding in */
-  transform: translateY(100%); /* Initially hide the footer by sliding it down */
+  transition: transform 0.3s ease-in-out; 
+  transform: translateY(100%); 
 }
 
 .footer.visible {
-  transform: translateY(0); /* Slide the footer up when visible */
+  transform: translateY(0); 
 }
 
-/* Flex container for the footer sections */
 .footer-container {
   display: flex;
   justify-content: space-between; /* Equal spacing between columns */
@@ -47,10 +45,14 @@
 /* Footer Text */
 .footer-section p {
   font-family: "Montserrat", sans-serif;
-  font-size: 0.875rem; /* Font size in rem for consistency */
-  color: #abb8c3; /* Slightly muted text */
-  line-height: 1.5; /* Ensures proper spacing between lines */
-  margin: 0.25rem 0; /* Adds some vertical spacing between paragraphs */
+  font-size: 0.875rem;
+  color: #abb8c3; 
+  line-height: 1.5; 
+  margin: 0.25rem 0; 
+}
+img{
+  width:3.5vh;
+  height:3.5vh;
 }
 
 .map iframe {
@@ -87,7 +89,7 @@
   }
 
   .footer-section {
-    width: 100%; /* Footer sections take the full width */
-    padding: 1.5rem 0; /* Adjusts padding for smaller screens */
+    width: 100%; 
+    padding: 1.5rem 0; 
   }
 }

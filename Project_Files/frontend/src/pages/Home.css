@@ -8,22 +8,6 @@
   padding-top: 10vh;
 }
 
-/* body {
-  width: 100%;
-} */
-
-/* .container {
-  font-family: 'Montserrat', serif; /* Updated font */
-  /* margin: 0 auto;
-  padding: 2vw;
-  box-sizing: border-box;
-  background-color: white; 
-  border: 1px solid #b8b1a0; 
-  border-radius: 0.5rem;
-  box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.563);  */
-/* }  */
-
-/* Flexbox utility classes */
 .flex-row {
   display: flex;
   flex-direction: column;
@@ -43,17 +27,17 @@
 
 .text-center h2 {
   margin: 3vh;
-  color: #413e35; /* Dark brown for headings */
+  color: #413e35; 
 }
 
 p {
   font-size: 1.25em;
-  color: rgb(78, 75, 75); /* Neutral text color */
+  color: rgb(78, 75, 75); 
 }
 
 /* Hero Section */
 .hero-section {
-  background-color: #d6c387; /* Gold-inspired tone */
+  background-color: #d6c387; 
   padding: 2vw 0;
   padding-top: 60vw;
 }
@@ -68,13 +52,11 @@ p {
   margin-bottom: 2vw;
   margin-left: 5vw;
   line-height: 1.5;
-  color: #413e35; /* Consistent dark brown */
+  color: #413e35;
 }
 
 .highlight {
   color: #6b6a64; 
-  /* font-size: larger; */
-  /* padding-top: 0%; */
   
 }
 
@@ -84,7 +66,7 @@ p {
 
 .description {
   font-family: 'Montserrat', serif;
-  color: #413e35; /* Dark text for readability */
+  color: #413e35; 
   margin-bottom: 2vw;
   font-size: 1.25vw;
   margin-left: 5vw;
@@ -111,13 +93,13 @@ p {
   /* max-width: 100%; */
   height: 30vh;
   width: 50vh;
-  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
 }
 
 /* Features Section */
 .features-section {
   padding: 6vw 0;
-  background-color: #e9d9b7; /* Light beige for section */
+  background-color: #e9d9b7;
 }
 
 .features-grid {
@@ -152,25 +134,25 @@ p {
   font-size: 1.5vw;
   font-weight: bold;
   margin-bottom: 1.5vw;
-  color: #413e35; /* Consistent heading color */
+  color: #413e35;
 }
 
 .feature-description {
-  color: rgb(78, 75, 75); /* Neutral text */
+  color: rgb(78, 75, 75); 
   font-size: 1.25vw;
 }
 
 /* Profile Section */
 .profile-section,
 .bid-section {
-  background-color: #f5e7cb; /* Soft beige tone */
+  background-color: #f5e7cb; 
   padding: 6vw 0;
-  border-top: 1px solid #b8b1a0; /* Section separation */
+  border-top: 1px solid #b8b1a0; 
 }
 
 .btn-primary {
   padding: 3vw 6vw;
-  background-color: #413e35; /* Dark brown button */
+  background-color: #413e35; 
   color: #fff;
   border: none;
   border-radius: 0.25rem;
@@ -180,5 +162,5 @@ p {
 }
 
 .btn-primary:hover {
-  background-color: #d6c48e; /* Hover color consistent with buttons */
+  background-color: #d6c48e; 
 }

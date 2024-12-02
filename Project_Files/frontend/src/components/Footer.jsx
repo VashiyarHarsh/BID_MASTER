@@ -49,14 +49,14 @@ export const Footer = () => {
             <a href="#twitter"> 
                 {/* -->Link of website to be added */}
               <i className="fab fa-twitter">
-                <img src="./img/Twitter.png">
+                <img src="/Images/Twitter.png">
                 </img>
               </i>
             </a>
             <a href="#linkedin">
                {/* -->Link of website to be added */}  
               <i className="fab fa-linkedin">
-              <img src="./img/Linkedin.png">
+              <img src="/Images/Linkedin.png">
               </img>
               </i>
             </a>

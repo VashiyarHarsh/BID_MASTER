@@ -6,7 +6,6 @@ import {Navbar} from "./components/Navbar";
 import {Footer} from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "./App.css"
-import UserProfile from "./pages/UserProfile"
 import SignupAndLogin from "./pages/SignupAndLogin"
 import LiveAuctionPage from './pages/LiveAuctionPage';
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -40,12 +39,11 @@ const App = () => {
         <Route path="/Login" element={<SignupAndLogin/>}/>
         <Route path="/SignOut" element={<SignOut/>}/>
         <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
-        <Route element={<ProtectedRoute/>}>
+        {/* <Route element={<ProtectedRoute/>}> */}
         <Route path="/AddProducts" element={<AddProducts />} />
-        {/* <Route path="/profile" element={<UserProfile/>}/> */}
-        <Route path="/BidLive" element={<LiveAuctionPage productImage="https://via.placeholder.com/300" initialPrice={4000} />} />
         <Route path="/Profile" element={<Profile/>}/>
-        </Route>
+        <Route path="/BidLive" element={<LiveAuctionPage productImage="https://via.placeholder.com/300" initialPrice={4000} />} />
+        {/* </Route> */}
       </Routes>
       <Footer />
 

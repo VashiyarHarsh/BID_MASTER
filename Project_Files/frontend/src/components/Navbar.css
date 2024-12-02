@@ -40,7 +40,7 @@ html, body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-left: 10vw;
+  margin-left: 4vw;
   
 }
 
@@ -48,7 +48,7 @@ html, body {
 .bidmaster {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 2rem; /* Adjusted font size */
+  font-size: 2.5rem; /* Adjusted font size */
   color: rgba(255, 255, 255, 1); /* White color */
  
   
@@ -108,7 +108,6 @@ nav ul li a:hover::before {
   width: 100%;
 }
 
-/* Targeting the "Add Products" link (3rd item) */
 .nav-links li:nth-child(3) {
-  margin-right: 5vw; /* Increased space between "Add Products" and "Sign In" */
+  margin-right: 3vw; /* Increased space between "Add Products" and "Sign In" */
 }

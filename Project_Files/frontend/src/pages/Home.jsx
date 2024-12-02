@@ -23,7 +23,7 @@ export const Home = () => {
             </div>
             <div className="image-content" id="img1">
               <img
-                src="/src/img/img1_auction.jpg"
+                src="/Images/img1_auction.jpg"
                 alt="Auction Illustration"
                 className="image-rounded"
               />
@@ -80,10 +80,8 @@ export const Home = () => {
               <h2 className="subtitle highlight">Create a Lot</h2>
               <p className="description">
                 To start selling, simply create a new lot in "ADD PRODUCT" page by entering valid information such as the item name, category, and starting price.... The more detailed your lot information, the better chances you have of getting bids. Our intuitive platform will guide you through the entire process, ensuring a seamless experience.
-                
-                {/* <p>To start selling, simply head to the "ADD PRODUCT" page and create a new lot by entering all the necessary details, such as the item name, category, starting price, and a clear description of the product. The more information you provide, such as high-quality images, item condition, and specific features, the better your chances of attracting potential buyers. A well-detailed listing helps buyers make informed decisions, increasing the likelihood of receiving bids.
-Our user-friendly platform is designed to guide you step-by-step through the entire listing process, ensuring that you don't miss any key details. From setting up your auction to tracking bids in real-time, we make it easy for you to manage your items and maximize your success in the countdown auction.</p> */}
-              </p>
+                </p>
+    
               
             </div>
             <div className="image-content" id="img2">
@@ -120,5 +118,4 @@ Our user-friendly platform is designed to guide you step-by-step through the ent
     );
 };
 
-// export default Home
 
