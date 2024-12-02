@@ -23,26 +23,48 @@ const addProduct = async (req, res) => {
       return res.status(400).json({ message: "No certifications uploaded" });
     }
 
-    // Upload both product images and certifications in parallel
-    const imageUrls = await Promise.all(
-      productImages.map(async (file) => {
-        const uploadResult = await uploadOnCloudinary(file.path);
-        return uploadResult ? uploadResult.url : null;
-      })
-    );
+    const [photoUploads] = await Promise.all([
+      Promise.all(
+        productImages.map((photoFile) =>
+          uploadOnCloudinary(photoFile.buffer, "image")
+        )
+      ),
+    ]);
 
-    const certificationsUrls = await Promise.all(
-      certifications.map(async (file) => {
-        const uploadResult = await uploadOnCloudinary(file.path);
-        return uploadResult ? uploadResult.url : null;
-      })
-    );
+    const [certiUploads] = await Promise.all([
+      Promise.all(
+        certifications.map((certiFile) =>
+          uploadOnCloudinary(certiFile.buffer, "raw")
+        )
+      ),
+    ]);
+
+    // Upload both product images and certifications in parallel
+    // const imageUrls = await Promise.all(
+    //   productImages.map(async (file) => {
+    //     const uploadResult = await uploadOnCloudinary(file.path);
+    //     return uploadResult ? uploadResult.url : null;
+    //   })
+    // );
+
+    // const certificationsUrls = await Promise.all(
+    //   certifications.map(async (file) => {
+    //     const uploadResult = await uploadOnCloudinary(file.path);
+    //     return uploadResult ? uploadResult.url : null;
+    //   })
+    // );
+
+    const photoUrls = photoUploads.map((upload) => upload.secure_url);
+    const certiUrls = certiUploads.map((upload) => upload.secure_url);
+
+    console.log(photoUrls);
+    console.log(certiUrls);
 
     // Prepare the product data with both image URLs
     const productData = {
       ...req.body,
-      productImagesURL: imageUrls.filter((url) => url !== null),
-      certifications: certificationsUrls.filter((url) => url !== null),
+      productImagesURL: photoUrls,
+      certifications: certiUrls,
       seller: req.user.id
     };
 
