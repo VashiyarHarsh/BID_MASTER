@@ -1,29 +1,22 @@
-const cloudinary = require("cloudinary").v2;
-const fs = require("fs");
+// config/cloudinary.js
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config(); // Ensure dotenv is loaded to access environment variables
 
+        cloudinary.config({
+            cloud_name: "dlvff7ud6",
+            api_key: "538367743384172",
+            api_secret: "mB6uRUOaV86aO3iFcaJMe-NG8S4",
+        });
 
-cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET 
-});
-
-const uploadOnCloudinary = async (localFilePath) => {
-    try {
-        if (!localFilePath) return null
-        //upload the file on cloudinary
-        const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: "auto"
-        })
-        // file has been uploaded successfull
-        console.log("file is uploaded on cloudinary ", response.url);
-        fs.unlinkSync(localFilePath)
-        return response;
-
-    } catch (error) {
-        fs.unlinkSync(localFilePath) // remove the locally saved temporary file as the upload operation got failed
-        return null;
-    }
-}
-
-module.exports = { uploadOnCloudinary };
+        exports.uploadOnCloudinary = (fileBuffer, resourceType) => {
+            return new Promise((resolve, reject) => {
+              const uploadStream = cloudinary.uploader.upload_stream(
+                { resource_type: resourceType },
+                (error, result) => {
+                  if (error) reject(error);
+                  else resolve(result);
+                }
+              );
+              uploadStream.end(fileBuffer);
+          });
+        };
