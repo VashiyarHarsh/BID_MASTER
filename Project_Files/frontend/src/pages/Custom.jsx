@@ -7,6 +7,7 @@ const Custom = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const token = localStorage.getItem("token");
 // productName: { type: String, required: [true, "PLEASE ENTER PRODUCT NAME"] },
 // productDescription: { type: String, required: [true, "PLEASE ENTER DESCRIPTION AN ITEM"] },
 // dimensions: { type: String, required: [false, "PLEASE ENTER DIMENSION"] },
@@ -54,14 +55,17 @@ useEffect(() => {
             //body: JSON.stringify(formData),
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
+            credentials: 'include',
         });
+        console.log(response);
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
         const data = await response.json();
         setProducts(data);
-        //console.log(data);
+        console.log(data);
       } catch (error) {
         setError(error.message);
       } finally {

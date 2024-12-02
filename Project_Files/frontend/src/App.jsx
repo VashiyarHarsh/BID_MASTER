@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route element={<ProtectedRoute/>}>
         <Route path="/AddProducts" element={<AddProducts />} />
-        <Route path="/profile" element={<UserProfile/>}/>
+        {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/BidLive" element={<LiveAuctionPage productImage="https://via.placeholder.com/300" initialPrice={4000} />} />
         <Route path="/Profile" element={<Profile/>}/>
         </Route>
