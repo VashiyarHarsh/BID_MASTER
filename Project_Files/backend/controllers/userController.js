@@ -36,7 +36,19 @@ const handleUserSignIn = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        return res.status(200).send(user);
+    }
+    catch (error) {
+        return res.status(404).send("User not found");
+    }
+}
+
 module.exports = {
     handleUserSignUp,
-    handleUserSignIn
+    handleUserSignIn,
+    getUserById
 };
