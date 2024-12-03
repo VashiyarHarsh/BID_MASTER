@@ -5,7 +5,8 @@
   background-color: #f5e7cb; /* Soft background similar to #c8b158 tone */
   margin: 0;
   padding: 0;
-  padding-top: 10vh;
+  padding-top: 90vh;
+  margin-bottom: -63vh;
 }
 
 .flex-row {
@@ -39,7 +40,7 @@ p {
 .hero-section {
   background-color: #d6c387; 
   padding: 2vw 0;
-  padding-top: 60vw;
+  padding-top: 70vh;
 }
 .bid{
   color: #161102;

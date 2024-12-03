@@ -8,15 +8,17 @@
   
   
   .timer-p {
-    font-size: 2rem; /* Large text */
-    font-weight: bold; /* Emphasized text */
-    color: #2c3e50; /* Dark grayish-blue text */
-    padding: 10px;
-    border: 2px solid #3498db; /* Blue border */
-    border-radius: 10px; /* Rounded corners */
-    background-color: #ecf0f1; /* Light gray background */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+   
+    border: 0.1rem solid #3498db;
+    border-radius: 1rem;
+    background-color: #ecf0f1;
+    box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 12vw;
+    margin: 0 auto;
   }
   
   
