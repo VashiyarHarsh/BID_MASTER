@@ -1,17 +1,14 @@
 const Product = require("../models/product_db");
+
 const Category = require("../models/categories_db");
+
 const User = require("../models/users_db");
+
 const { uploadOnCloudinary } = require("../utils/cloudinary");
-// const fs = require("fs");
-// const { get } = require("http");
 
 const addProduct = async (req, res) => {
   try {
-    // console.log("Files received:", req.files); // Debugging line
-    
     const imageFiles = req.files;
-  
-    // Ensure the required fields exist
     const productImages = imageFiles.productImagesURL || [];
     const certifications = imageFiles.certifications || [];
 
@@ -39,28 +36,9 @@ const addProduct = async (req, res) => {
       ),
     ]);
 
-    // Upload both product images and certifications in parallel
-    // const imageUrls = await Promise.all(
-    //   productImages.map(async (file) => {
-    //     const uploadResult = await uploadOnCloudinary(file.path);
-    //     return uploadResult ? uploadResult.url : null;
-    //   })
-    // );
-
-    // const certificationsUrls = await Promise.all(
-    //   certifications.map(async (file) => {
-    //     const uploadResult = await uploadOnCloudinary(file.path);
-    //     return uploadResult ? uploadResult.url : null;
-    //   })
-    // );
-
     const photoUrls = photoUploads.map((upload) => upload.secure_url);
     const certiUrls = certiUploads.map((upload) => upload.secure_url);
 
-    console.log(photoUrls);
-    console.log(certiUrls);
-
-    // Prepare the product data with both image URLs
     const productData = {
       ...req.body,
       productImagesURL: photoUrls,
@@ -68,22 +46,20 @@ const addProduct = async (req, res) => {
       seller: req.user.id
     };
 
-    // Create the new product
     const newProduct = await Product.create(productData);
+
     const user = await User.findById(req.user.id);
     user.unsoldItems.push(newProduct._id);
     await user.save();
     
     const category = await Category.findOne({ name: req.body.category });
-   
     const subcategory = category.subcategories.find(sub => sub.name === req.body.subCategory);
-   //console.log(subcategory);
     subcategory.items.push(newProduct._id);
     await category.save();
-    // Respond with success
+
     res.status(200).json({ message: "Product added successfully", product: newProduct });
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to add product", error: error.message });
   }
 };
@@ -93,8 +69,8 @@ const getProductsBySearch = async (req, res) => {
     const { name } = req.params;
     const products = await Product.find({ productName: name, productStatus: { $ne: 'unverified' } });
     res.status(200).json(products);
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 }
@@ -103,8 +79,8 @@ const getLatestCreatedProducts = async (req, res) => {
   try {
     const products = await Product.find({ productStatus: { $ne: 'unverified' } }).sort({ createdAt: -1 }).limit(5);
     res.status(200).json(products);
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 }
@@ -113,8 +89,8 @@ const getOldestCreatedProducts = async (req, res) => {
   try {
     const products = await Product.find({ productStatus: { $ne: 'unverified' } }).sort({ createdAt: 1 }).limit(5);
     res.status(200).json(products);
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 }
@@ -124,8 +100,8 @@ const getProductsByReservePriceRange = async (req, res) => {
     const { min, max } = req.params;
     const products = await Product.find({ reservePrice: { $gte: min, $lte: max }, productStatus: { $ne: 'unverified' } });
     res.status(200).json(products);
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 }
@@ -139,12 +115,10 @@ const verifyProduct = async (req, res) => {
       }
       product.productStatus = "verified";
       await product.save();
-      res.status(200).send({
-          message: "Product status updated to verified",
-          product,
-      });
-  } catch (err) {
-      console.error("Error verifying product:", err);
+
+      res.status(200).send({ message: "Product status updated to verified", product });
+  } 
+  catch (err) {
       res.status(500).send("Internal Server Error");
   }
 }
@@ -156,29 +130,31 @@ const removeProduct = async (req, res) => {
       if (!product) {
           return res.status(404).send("Product not found");
       }
+
       const seller = await User.findById(product.seller);
       if(!seller) {
           return res.status(404).send("Seller not found");
       }
       seller.unsoldItems = seller.unsoldItems.filter(item => item.toString() !== productId);
       await seller.save();
+
       const category = await Category.findOne({ name: product.category });
       if(!category) {
           return res.status(404).send("Category not found");
       }
+
       const subcategory = category.subcategories.find(sub => sub.name === product.subCategory);
       if(!subcategory) {
           return res.status(404).send("Subcategory not found");
       }
       subcategory.items = subcategory.items.filter(item => item.toString() !== productId);
       await category.save();
+
       await Product.findByIdAndDelete(productId);
-      res.status(200).send({
-          message: "Product removed successfully",
-          product,
-      });
-  } catch (err) {
-      console.error("Error removing product:", err);
+
+      res.status(200).send({ message: "Product removed successfully", product });
+  } 
+  catch (err) {
       res.status(500).send("Internal Server Error");
   }
 }
@@ -187,8 +163,8 @@ const getUnverifiedProducts = async (req, res) => {
   try {
     const products = await Product.find({ productStatus: "unverified" });
     res.status(200).json(products);
-  } catch (error) {
-    console.error(error);
+  } 
+  catch (error) {
     res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 }

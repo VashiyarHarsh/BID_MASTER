@@ -36,11 +36,11 @@ const productSchema = new mongoose.Schema({
         default: 0
     },
     certifications: {
-        type: [String], // Array of image URLs or file paths
+        type: [String],
         required: true,
     },
     productImagesURL: {
-        type: [String], // Array of image URLs or file paths
+        type: [String],
         required: true
     },
     category: {
@@ -64,17 +64,8 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     }
-    // bids: [{
-    //     bidder: { 
-    //         type: mongoose.Schema.ObjectId, 
-    //         ref: 'USER' 
-    //     },
-    //     bid: Number,
-    //     time: Date
-    // }]
 })
 
-// module.exports = mongoose.model('Product', productSchema);
-
 const Product = new mongoose.model('Product', productSchema);
+
 module.exports = Product

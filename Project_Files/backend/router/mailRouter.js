@@ -1,12 +1,17 @@
 const express = require('express');
-const { forgotPassword, sendOTP, OTPverify, handleVerifyOTP, handleResetPassword } = require('../controllers/mailController');
+
 const app = express.Router();
+
+const { 
+    forgotPassword, 
+    sendOTP, 
+    handleVerifyOTP, 
+    handleResetPassword 
+} = require('../controllers/mailController');
 
 app.get('/forgotpassword', forgotPassword);
 
 app.post('/sendotp', sendOTP);
-
-//app.post('/verifyotp', OTPverify);
 
 app.post('/verifyotp', handleVerifyOTP);
 

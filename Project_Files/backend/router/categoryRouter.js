@@ -1,6 +1,11 @@
 const express = require('express');
-const { getFilteredItemsByCategory, getFilteredItemsBySubcategory } = require('../controllers/categoryController.js');
+
 const app = express.Router();
+
+const { 
+    getFilteredItemsByCategory, 
+    getFilteredItemsBySubcategory
+} = require('../controllers/categoryController.js');
 
 app.get('/:cname', getFilteredItemsByCategory);
 

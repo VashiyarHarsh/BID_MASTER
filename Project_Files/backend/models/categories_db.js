@@ -78,11 +78,12 @@ async function initializeCategories() {
         const existingCategories = await Category.find();
         if (existingCategories.length === 0) {
             await Category.insertMany(categories);
-            console.log('Categories added successfully');
-        } else {
-            console.log('Categories already exist, skipping initialization');
+        } 
+        else {
+            console.log('Categories already exist in the database');
         }
-    } catch (err) {
+    } 
+    catch (err) {
         console.error('Error adding categories:', err);
     }
 }

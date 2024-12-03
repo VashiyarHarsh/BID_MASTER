@@ -10,7 +10,6 @@ async function getFilteredItemsByCategory(req, res) {
         const items = category.subcategories.flatMap(subcategory => subcategory.items);
         return res.status(200).json(items);
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 }
@@ -29,7 +28,6 @@ async function getFilteredItemsBySubcategory(req, res) {
         const items = subcategory.items || [];
         return res.status(200).json(items);
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 }
