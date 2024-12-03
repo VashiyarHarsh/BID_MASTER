@@ -50,7 +50,7 @@ useEffect(() => {
       try {
         //const url = isAdmin ? 'http://localhost:5124/api/form/unverified' : 'http://localhost:5124/api/form/';
         //const response = await fetch(url);
-        const response = await fetch('https://bid-master-back.vercel.app/api/form/unverified', {
+        const response = await fetch('https://bid-master-backend.vercel.app/api/form/unverified', {
             method: 'GET',
             //body: JSON.stringify(formData),
             headers: {
@@ -79,10 +79,11 @@ useEffect(() => {
 
   const handleVerifyProduct = async (productId) => {
     try {
-      const response = await fetch(`https://bid-master-back.vercel.app/api/form/verify/${productId}`, {
+      const response = await fetch(`https://bid-master-backend.vercel.app/api/form/verify/${productId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         credentials: 'include',
       });
@@ -102,6 +103,7 @@ useEffect(() => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         credentials: 'include',
       });
@@ -132,12 +134,12 @@ useEffect(() => {
             <h2 style={styles.productName}>{product.productName}</h2>
             <p style={styles.description}>{product.productDescription}</p>
             <p style={styles.price}>Reserve Price: ${product.reservePrice}</p>
-            {isAdmin && (
+            
               <div style={styles.adminControls}>
                 <button style={styles.button} onClick={() => handleVerifyProduct(product._id)}>Verify</button>
                 <button style={styles.button} onClick={() => handleRemoveProduct(product._id)}>Reject</button>
               </div>
-            )}
+            
           </div>
         ))}
       </div>

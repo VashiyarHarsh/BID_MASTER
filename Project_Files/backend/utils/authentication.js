@@ -12,40 +12,35 @@ function createTokenForUser(user) {
 }
 
 function validateToken(token) {
-    const payload = JWT.verify(token, secret);
-    return payload;
+    try {
+        const payload = JWT.verify(token, secret);
+        return payload;
+    } catch (err) {
+        console.error('Token verification failed:', err);  // Log the error
+        throw new Error('Invalid token');
+    }
 }
 
-// function checkForAuthenticationCookie(cookieName) {
-//     return (req, res, next) => {
-//       const tokenCookieValue = req.cookies[cookieName];
-//       if (!tokenCookieValue) {
-//         return res.status(401).json({ error: "Authentication required" });
-//       }
-  
-//       try {
-//         const userPayload = validateToken(tokenCookieValue); // Token validation logic
-//         req.user = userPayload;
-//         res.locals.user = userPayload;
-//         next();
-//       } catch (error) {
-//         console.error("Invalid token:", error);
-//         return res.status(401).json({ error: "Invalid or expired token" });
-//       }
-//     };
-//   }
 const checkForAuthorizationHeader = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const authHeader = req.headers.authorization;
+    console.log(authHeader);
+    if (!authHeader) {
         return res.status(401).send("Unauthorized: Token missing or invalid");
     }
     const token = authHeader.split(' ')[1]; // Extract the token
+    if (!token) {
+        return res.status(401).send("Unauthorized: Token invalid");
+    }
     try {
+        console.log('try')
         const userPayload = validateToken(token); // Token validation logic
         req.user = userPayload;
+        console.log(userPayload);
         res.locals.user = userPayload;
         next();
+        console.log('after next')
     } catch (err) {
+        console.log('catch')
         return res.status(403).send("Forbidden: Invalid token");
     }
 };
@@ -78,6 +73,18 @@ const restrictTo = (roles) => {
     };
 }
 
+const checkAdmin = (req, res, next) => {
+    const user = req.user;
+    console.log(user);
+    if(user.role !== 'Admin') {
+        return res.status(403).send("Access denied: Admins only");
+    }
+    // if (!user || !user.role || !Array.isArray(user.role) || !user.role.includes('Admin')) {
+    //   return res.status(403).send("Access denied: Admins only");
+    // }
+    next();
+  };
+
 function setCookie(res, name, value, options = {}) {
     const cookieOptions = {
         // httpOnly: true,
@@ -99,6 +106,7 @@ module.exports = {
     createTokenForUser,
     validateToken,
     restrictTo,
+    checkAdmin,
     setCookie,
     clearCookie,
 };
