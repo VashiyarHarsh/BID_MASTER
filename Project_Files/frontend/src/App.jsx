@@ -1,7 +1,7 @@
 import {Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import AddProducts from "./pages/AddProducts";
-import {ViewProducts} from "./pages/ViewProducts";
+import ViewProducts from "./pages/ViewProducts";
 import {Navbar} from "./components/Navbar";
 import {Footer} from "./components/Footer";
 import { ToastContainer } from "react-toastify";
