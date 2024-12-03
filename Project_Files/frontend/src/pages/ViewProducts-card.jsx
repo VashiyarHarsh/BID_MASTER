@@ -137,5 +137,5 @@ const ViewProductsCard = ({ product }) => {
     </>
   );
 };
-
 export default ViewProductsCard;
+
