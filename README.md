@@ -19,7 +19,7 @@ An easy-to-use website that facilitates international collaboration on a single 
 
 ### For Registered Users
 - **Buyers**:
-  - Bid on available items in real time.
+  - Bid on available items in ample of time
   - View their bidding history and bid status updates.
 - **Sellers**:
   - List items for auction.
@@ -30,15 +30,14 @@ An easy-to-use website that facilitates international collaboration on a single 
 - Set categories and monitor auction activity.
 
 ### Additional Functionalities
-- Real-time updates on bid status using WebSocket for live auctions.
 - Profile discovery for participants.
 - Foreign exchange display for international transactions.
 
 ## Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript (React)
-- **Backend**: Node.js, Express
+- **Backend**: Node.js, Express.js
 - **Database**: MongoDB Atlas
-- **Real-time communication**: WebSocket
+- **Image-Storage**: Cloudinary
 
 
