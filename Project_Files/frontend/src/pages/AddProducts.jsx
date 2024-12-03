@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddProducts.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -88,7 +91,8 @@ const AddProducts = () => {
       });
       const data = await response.json();
 
-      alert("Product added successfully!");
+      // alert("Product added successfully!");
+      toast.success("Product added successfully!");
       navigate('/');
     } catch (error) {
       console.log("add product", error);
