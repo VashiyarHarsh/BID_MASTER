@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './SignupAndLogin.module.css';  // Import the CSS module
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignupAndLogin() {
     const [isLogin, setIsLogin] = useState(true);
@@ -105,7 +107,7 @@ export default function SignupAndLogin() {
             throw new Error(errorMessage);
           }
           
-          
+          toast.success('Sign up successful! Welcome aboard.');
           navigate('/');
         } catch (err) {
         
@@ -155,7 +157,7 @@ export default function SignupAndLogin() {
               // If successful, navigate to the home page or another page
 
               console.log('Login Form Submitted');
-
+              toast.success('Login successful!');
               navigate('/');
             } catch (err) {
             //   setError(err.message);
