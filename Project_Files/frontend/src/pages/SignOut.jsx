@@ -1,6 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import "./SignOut.css";
 
 const SignOut = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const SignOut = () => {
 
     return (
         <div>
-            <button onClick={handleSignOut}>Sign Out</button>
+            <button className="sign-out-button" onClick={handleSignOut}>Sign Out</button>
         </div>
     );
 };

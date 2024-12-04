@@ -68,7 +68,7 @@ html, body {
   margin: 0;
   position: relative; /* Make sure the transform applies correctly */
   left: 0; /* Reset any default position */
-  transform: translateX(35vw); 
+  transform: translateX(20vw); 
 }
 
 nav ul li a {
