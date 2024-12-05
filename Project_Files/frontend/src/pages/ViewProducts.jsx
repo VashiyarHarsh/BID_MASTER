@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ViewProductsCard from "./ViewProducts-card";
 import "./ViewProducts.css";
 import DarkSideImage from "./Dark_Side_of_the_Moon.png";
@@ -29,6 +29,39 @@ const ViewProducts = () => {
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortOption, setSortOption] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [fetchedProducts, setFetchedProducts] = useState([]);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5124/api/form/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      setFetchedProducts(data);
+      console.log(data);
+    } catch (error) {
+      setError(error.message);
+      console.error('Fetch error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, []);
 
   const products = [
     { 
@@ -179,6 +212,21 @@ const ViewProducts = () => {
 
   return (
     <div className={`view-products ${isModalOpen ? 'modal-open' : ''}`}>
+      <div>
+       <div>
+         {fetchedProducts.map((product) => (
+          <div key={product._id}>
+            <img
+              src={product.productImagesURL?.[0] || 'https://via.placeholder.com/150'}
+              alt={product.productName}
+            />
+            <h2>{product.productName}</h2>
+            <p>{product.productDescription}</p>
+            <p>Reserve Price: ${product.reservePrice}</p>
+          </div>
+        ))}
+      </div>
+    </div>
       {/* Filter Box Section */}
       <div className="filter-box">
         <h4>Filters</h4>
@@ -265,7 +313,7 @@ const ViewProducts = () => {
       {/* Product Grid Section */}
       <div className="product-grid">
         {sortedProducts.map((product) => (
-          <ViewProductsCard key={product.id} product={product} />
+          <ViewProductsCard key={product._id} product={product} />
         ))}
       </div>
 
@@ -282,5 +330,23 @@ const ViewProducts = () => {
     </div>
   );
 };
+//   return (
+//     <div>
+//       <div>
+//         {products.map((product) => (
+//           <div key={product._id}>
+//             <img
+//               src={product.productImagesURL?.[0] || 'https://via.placeholder.com/150'}
+//               alt={product.productName}
+//             />
+//             <h2>{product.productName}</h2>
+//             <p>{product.productDescription}</p>
+//             <p>Reserve Price: ${product.reservePrice}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 export default ViewProducts;
